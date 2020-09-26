@@ -13,3 +13,7 @@ Source: The Movie Database (TMDb) API [themoviedb.org](https://www.themoviedb.or
 * Playing trailers in app with [android-youtube-player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
 * Loading, caching images with [Glide](https://bumptech.github.io/glide/)
 * [Retrofit](https://square.github.io/retrofit/), [DataStore](https://developer.android.com/topic/libraries/architecture/datastore), [Flows](https://developer.android.com/reference/java/util/concurrent/Flow) and more...
+
+## 
+
+<img src=Screenshot_1601121380.png width=250 >
