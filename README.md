@@ -16,4 +16,15 @@ Source: The Movie Database (TMDb) API [themoviedb.org](https://www.themoviedb.or
 
 ## 
 
-<img src=Screenshot_1601121380.png width=250 >
+<img src=readme_pics/fragment_view_media.png width=250 > <img src=readme_pics/fragment_about.png width=250 >
+<img src=readme_pics/media_cast.png width=250 >
+<img src=readme_pics/recommended.png width=250 >
+<img src=readme_pics/tv_show_seasons.png width=250 >
+<img src=readme_pics/actor_preview.png width=250 >
+<img src=readme_pics/tv_show_by_networks.png width=250 >
+<img src=readme_pics/genre.png width=250 >
+<img src=readme_pics/search.png width=250 >
+<img src=readme_pics/sort_and_filter.png width=250 >
+<img src=readme_pics/images_activity.png width=250 >
+<img src=readme_pics/lists.png width=250 >
+<img src=readme_pics/home_screen.png width=250 >
