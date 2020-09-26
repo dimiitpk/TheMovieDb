@@ -6,6 +6,8 @@ Source: The Movie Database (TMDb) API [themoviedb.org](https://www.themoviedb.or
 
 ## 
 
+* Clean architecture
+* MVI architecture pattern
 * Dependency injection using [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 * Navigating through application with [Navigation Component](https://developer.android.com/guide/navigation)
 * Caching data with [Room](https://developer.android.com/jetpack/androidx/releases/room)
