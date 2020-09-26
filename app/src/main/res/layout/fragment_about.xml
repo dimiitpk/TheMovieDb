@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/about_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:visibility="gone"
+            android:fontFamily="@font/chewy"
+            android:maxLines="3"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/read_more_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chewy"
+            android:text="@string/read_more"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/overview" />
+
+        <TextView
+            android:id="@+id/genres_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/chewy"
+            android:text="@string/genres"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/read_more_text" />
+
+        <ScrollView
+            android:id="@+id/genre_scroll_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            android:scrollbars="none"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genres_info">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/genre_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/network_infos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/chewy"
+            android:text="@string/networks"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/genre_scroll_container"
+            app:layout_constraintTop_toBottomOf="@+id/genre_scroll_container" />
+
+        <ScrollView
+            android:id="@+id/network_scroll_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/network_infos"
+            app:layout_constraintTop_toBottomOf="@+id/network_infos">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/network_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+        </ScrollView>
+
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/trailer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            app:autoPlay="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/network_scroll_container"
+            app:showFullScreenButton="true"
+            app:showYouTubeButton="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/more_videos"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chewy"
+            android:textColor="@color/colorPrimaryText"
+            android:visibility="gone"
+            app:icon="@drawable/ic_arrow_long_right"
+            app:iconGravity="end"
+            app:layout_constraintStart_toStartOf="@+id/genre_scroll_container"
+            app:layout_constraintTop_toBottomOf="@+id/trailer" />
+
+        <LinearLayout
+            android:id="@+id/videos_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/more_videos">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/swipe_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/chewy"
+                android:text="@string/swipe_info_text"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/videos_recycler_view_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/videos_container">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/videos_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/chewy"
+            android:text="@string/information"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/videos_recycler_view_container" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/play_trailer_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chewy"
+            android:text="@string/play_trailer"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/colorPrimaryText"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/more_videos" />
+
+        <TableLayout
+            android:id="@+id/details_info_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:shrinkColumns="*"
+            app:layout_constraintEnd_toEndOf="@+id/play_trailer_button"
+            app:layout_constraintStart_toStartOf="@+id/info_text"
+            app:layout_constraintTop_toBottomOf="@+id/info_text">
+
+
+        </TableLayout>
+
+
+
+        <TextView
+            android:id="@+id/media_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/chewy"
+            android:layout_marginStart="16dp"
+            android:text="@string/media"
+            android:visibility="gone"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_info_container" />
+
+        <ImageView
+            android:id="@+id/posters"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/todo"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="W,1:1.5"
+            app:layout_constraintBottom_toBottomOf="@+id/backdrop"
+            app:layout_constraintStart_toStartOf="@+id/media_text"
+            app:layout_constraintTop_toBottomOf="@id/media_text" />
+
+        <TextView
+            android:id="@+id/posters_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:fontFamily="@font/chewy"
+            android:visibility="gone"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/posters"
+            app:layout_constraintBottom_toBottomOf="@+id/posters" />
+
+        <ImageView
+            android:id="@+id/backdrop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="invisible"
+            android:layout_marginEnd="12dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/todo"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintStart_toEndOf="@+id/posters"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/posters" />
+
+        <TextView
+            android:id="@+id/backdrop_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:fontFamily="@font/chewy"
+            android:visibility="gone"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/backdrop"
+            app:layout_constraintBottom_toBottomOf="@+id/backdrop" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/info_line_key"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/chewy"
+        android:gravity="start"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/info_line_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/chewy"
+        android:gravity="start"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp" />
+</TableRow>

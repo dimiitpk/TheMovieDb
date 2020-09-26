@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <ImageView
+        android:id="@+id/detail_view_image"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/todo"
+        android:scaleType="fitXY"
+        app:layout_constraintDimensionRatio="H,1:1.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <TextView
+        android:id="@+id/detail_view_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/chewy"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/detail_view_image"
+        app:layout_constraintTop_toTopOf="@+id/detail_view_image" />
+
+    <TextView
+        android:id="@+id/detail_view_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chewy"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/detail_view_date"
+        app:layout_constraintTop_toBottomOf="@+id/detail_view_date" />
+
+
+    <TextView
+        android:id="@+id/detail_view_overview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/chewy"
+        android:lines="5"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/detail_view_title"
+        app:layout_constraintTop_toBottomOf="@+id/detail_view_title" />
+
+    <TextView
+        android:id="@+id/detail_view_vote_average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:background="@drawable/text_background"
+        android:fontFamily="@font/chewy"
+        android:padding="6dp"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/detail_view_image"
+        app:layout_constraintTop_toTopOf="@id/detail_view_image" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

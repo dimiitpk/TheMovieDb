@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">MovieDatabase</string>
+
+    <string name="text_error">Error</string>
+    <string name="text_success">Success</string>
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_info">Info</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_enter_a_title">Enter a title</string>
+    <string name="text_undo">Undo</string>
+
+
+    <string name="vote_average_format">%d%%</string>
+    <string name="episode_info_format">Ep%1$02d - %2$s</string>
+    <string name="season_and_episode_number_format">S%1$02dE%2$02d</string>
+    <string name="videos_with_length">videos(%1$d)</string>
+    <string name="as_string_format">as %s</string>
+    <string name="tv_shows_amount_format">%d tv shows</string>
+    <string name="movies_amount_format">%d movies</string>
+    <string name="persons_amount_format">%d persons</string>
+    <string name="episodes_amount_format">%d episodes</string>
+    <string name="posters_amount_format">%d posters</string>
+    <string name="backdrop_amount_format">%d backdrops</string>
+    <string name="number_slash_number">%1$d/%2$d</string>
+
+
+    <string name="send">Send</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search…</string>
+    <string name="staring_cast">Staring cast:</string>
+
+    <string name="play_trailer">play trailer</string>
+    <string name="hide_trailer">Hide trailer</string>
+    <string name="hide_videos">hide videos</string>
+
+    <string name="todo">todo</string>
+    <string name="user_score">user score</string>
+    <string name="swipe_info_text">Swipe left-right through videos</string>
+    <string name="percent_sign">%</string>
+    <string name="genres">Genres</string>
+    <string name="read_more">Read more</string>
+    <string name="read_less">Read less</string>
+
+    <string name="request_data_error">Requested data is not available…</string>
+    <string name="no_more_results">No more results…</string>
+
+    <string name="view">view</string>
+
+
+    <string name="revenue">Revenue</string>
+    <string name="budget">Budget</string>
+    <string name="runtime">Runtime</string>
+    <string name="status">Status</string>
+    <string name="homepage">Homepage</string>
+    <string name="release_date">Release date</string>
+    <string name="first_air_date">First air date</string>
+    <string name="last_air_date">Last air date</string>
+    <string name="original_title">Original title</string>
+    <string name="more_info">more info</string>
+    <string name="gender">Gender</string>
+    <string name="known_for_department">Known for department</string>
+    <string name="place_of_birth">Place of birth</string>
+    <string name="birthday">Birthday</string>
+    <string name="death_day">Death day</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="also_known_as">Also knows as</string>
+    <string name="home">Home</string>
+    <string name="networks">Networks</string>
+    <string name="done">Done</string>
+    <string name="sort_by">Sort by</string>
+    <string name="descending_z_a">Descending(Z-A)</string>
+    <string name="ascending_a_z">Ascending(A-Z)</string>
+    <string name="media">Media</string>
+    <string name="permission_required">Permission required</string>
+    <string name="allow">Allow</string>
+    <string name="deny">Deny</string>
+    <string name="information">Information</string>
+
+
+</resources>

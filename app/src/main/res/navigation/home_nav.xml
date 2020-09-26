@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.dimi.moviedatabase.presentation.main.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_viewMediaFragment"
+            app:destination="@id/viewMediaFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/viewMediaFragment"
+        android:name="com.dimi.moviedatabase.presentation.main.view.ViewMediaFragment"
+        android:label="ViewMediaFragment"
+        tools:layout="@layout/fragment_view_media">
+        <action
+            android:id="@+id/action_viewMediaFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_viewMediaFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_viewMediaFragment_self"
+            app:destination="@id/viewMediaFragment" />
+        <argument
+            android:name="mediaType"
+            android:defaultValue="MOVIE"
+            app:argType="com.dimi.moviedatabase.business.domain.state.MediaType" />
+        <argument
+            android:name="mediaId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <argument
+            android:name="mediaTypeName"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://www.themoviedb.org/{mediaTypeName}/{mediaId}" />
+        <action
+            android:id="@+id/action_viewMediaFragment_to_posterImagesActivity"
+            app:destination="@id/posterImagesActivity" />
+    </dialog>
+    <dialog
+        android:id="@+id/searchFragment"
+        android:name="com.dimi.moviedatabase.presentation.main.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_viewMediaFragment"
+            app:destination="@id/viewMediaFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="tabId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <argument
+            android:name="mediaType"
+            android:defaultValue="MOVIE"
+            app:argType="com.dimi.moviedatabase.business.domain.state.MediaType" />
+        <argument
+            android:name="network"
+            android:defaultValue="@null"
+            app:argType="com.dimi.moviedatabase.business.domain.model.Network"
+            app:nullable="true" />
+        <argument
+            android:name="viewType"
+            app:argType="com.dimi.moviedatabase.presentation.main.search.enums.ViewType" />
+    </dialog>
+    <activity
+        android:id="@+id/posterImagesActivity"
+        android:name="com.dimi.moviedatabase.presentation.images.FullScreenImageActivity"
+        android:label="activity_poster_images"
+        tools:layout="@layout/activity_poster_images">
+
+        <argument
+            android:name="mediaType"
+            android:defaultValue="MOVIE"
+            app:argType="com.dimi.moviedatabase.business.domain.state.MediaType" />
+        <argument
+            android:name="mediaId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <argument
+            android:name="orientation"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </activity>
+</navigation>
