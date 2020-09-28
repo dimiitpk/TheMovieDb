@@ -2,8 +2,6 @@ package com.dimi.moviedatabase.business.domain.model
 
 import android.os.Parcelable
 import com.dimi.moviedatabase.business.domain.state.MediaType
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -50,9 +48,4 @@ data class Movie(
         character,
         releaseDate,
         MediaType.MOVIE
-    ) {
-
-    override fun toString(): String {
-        return "Movie(id=$id, title='$title', popularity=$popularity, voteCount=$voteCount, releaseDate=$releaseDate, voteAverage=$voteAverage, overview='$overview', tagLine=$tagLine, posterPath=$posterPath, backdropPath=$backdropPath, genres=$genres, castList=$castList, budget=$budget, revenue=$revenue, status=$status, homepage=$homepage, originalTitle=$originalTitle, runtime=$runtime, imdbId=$imdbId, character=$character, actorId=$actorId)"
-    }
-}
+    )

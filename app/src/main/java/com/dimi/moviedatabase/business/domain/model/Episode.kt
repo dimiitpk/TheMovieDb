@@ -19,8 +19,3 @@ data class Episode(
     var voteCount: Int,
     var stillPath: String? = null
 ) : Parcelable
-{
-    override fun toString(): String {
-        return "Episode(id=$id, seasonId=$seasonId, tvShowId=$tvShowId, seasonNumber=$seasonNumber, episodeNumber=$episodeNumber, airDate='$airDate', overview='$overview', name='$name', voteAverage=$voteAverage, voteCount=$voteCount, stillPath=$stillPath)"
-    }
-}

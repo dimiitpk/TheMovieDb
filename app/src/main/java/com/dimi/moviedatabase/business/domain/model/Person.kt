@@ -39,10 +39,4 @@ data class Person(
         character,
         birthday,
         MediaType.PERSON
-    ) {
-
-
-    override fun toString(): String {
-        return "Person(id=$id, name='$name', gender=$gender, department=$department, placeOfBirth=$placeOfBirth, popular=$popular, birthday=$birthday, deathDay=$deathDay, biography=$biography, alsoKnownAs=$alsoKnownAs, profilePath=$profilePath, character=$character)"
-    }
-}
+    )

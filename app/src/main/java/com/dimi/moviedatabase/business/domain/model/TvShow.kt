@@ -48,9 +48,4 @@ data class TvShow(
     character,
     firstAirDate,
     MediaType.TV_SHOW
-) {
-
-    override fun toString(): String {
-        return "TvShow(id=$id, title='$title', popularity=$popularity, voteCount=$voteCount, firstAirDate=$firstAirDate, lastAirDate=$lastAirDate, voteAverage=$voteAverage, overview='$overview', numberOfEpisodes=$numberOfEpisodes, numberOfSeasons=$numberOfSeasons, posterPath=$posterPath, backdropPath=$backdropPath, genres=$genres, castList=$castList, seasons=$seasons, networks=$networks, type=$type, runtime=$runtime, status=$status, originalTitle=$originalTitle, homepage=$homepage, character=$character)"
-    }
-}
+)
