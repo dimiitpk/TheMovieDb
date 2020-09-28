@@ -42,12 +42,19 @@ open class Media(
         if (backdropPath != other.backdropPath) return false
         if (genres != other.genres) return false
         if (castList != other.castList) return false
+        if (runtime != other.runtime) return false
+        if (status != other.status) return false
+        if (originalTitle != other.originalTitle) return false
+        if (homepage != other.homepage) return false
+        if (character != other.character) return false
+        if (releaseDate != other.releaseDate) return false
+        if (mediaType != other.mediaType) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result : Int = id.toInt()
+        var result = id.hashCode()
         result = 31 * result + title.hashCode()
         result = 31 * result + popularity.hashCode()
         result = 31 * result + voteCount
@@ -57,7 +64,13 @@ open class Media(
         result = 31 * result + (backdropPath?.hashCode() ?: 0)
         result = 31 * result + (genres?.hashCode() ?: 0)
         result = 31 * result + (castList?.hashCode() ?: 0)
-
+        result = 31 * result + (runtime ?: 0)
+        result = 31 * result + (status?.hashCode() ?: 0)
+        result = 31 * result + (originalTitle?.hashCode() ?: 0)
+        result = 31 * result + (homepage?.hashCode() ?: 0)
+        result = 31 * result + (character?.hashCode() ?: 0)
+        result = 31 * result + (releaseDate?.hashCode() ?: 0)
+        result = 31 * result + mediaType.hashCode()
         return result
     }
 }
