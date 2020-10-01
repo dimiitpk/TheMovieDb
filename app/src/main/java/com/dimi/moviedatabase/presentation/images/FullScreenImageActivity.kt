@@ -43,15 +43,20 @@ class FullScreenImageActivity : BaseActivity(), Permissions {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                displayPermissionsRequiredDialog("Permission required to save and send photos from the Web.").positiveButton {
-                    ActivityCompat.requestPermissions(
-                        this,
-                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        Constants.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-                    )
-                }
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                displayPermissionsRequiredDialog(
+                    "Permission required to save and send photos from the Web.",
+                    positiveButtonFun = {
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            Constants.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+                        )
+                    })
             } else {
                 ActivityCompat.requestPermissions(
                     this,

@@ -4,10 +4,11 @@ import android.os.Parcelable
 import com.dimi.moviedatabase.business.domain.model.*
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.business.domain.state.ViewState
-import com.dimi.moviedatabase.presentation.main.search.SortFilter
-import com.dimi.moviedatabase.presentation.main.search.SortOrder
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
+import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
+import com.dimi.moviedatabase.presentation.main.view.state.ViewMediaViewState
 import com.dimi.moviedatabase.util.Constants.LAYOUT_GRID_SPAN_COUNT
 import kotlinx.android.parcel.Parcelize
 
@@ -56,6 +57,6 @@ data class SearchViewState(
     }
 
     companion object {
-        const val BUNDLE_KEY = "com.dimi.moviedatabase.presentation.main.search.state.SearchViewState"
+        fun getBundleKey() = SearchViewState::class.java.`package`?.name + "." + SearchViewState::class.simpleName
     }
 }

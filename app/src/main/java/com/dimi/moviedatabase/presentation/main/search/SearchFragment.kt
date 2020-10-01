@@ -5,8 +5,6 @@ import android.os.Handler
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -22,25 +20,21 @@ import com.dimi.moviedatabase.business.data.network.NetworkErrors.isPaginationDo
 import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.business.domain.state.StateMessageCallback
+import com.dimi.moviedatabase.databinding.DrawerMenuItemLayoutBinding
+import com.dimi.moviedatabase.databinding.FragmentSearchBinding
 import com.dimi.moviedatabase.presentation.GlideApp
 import com.dimi.moviedatabase.presentation.common.*
 import com.dimi.moviedatabase.presentation.common.adapters.MediaListAdapter
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
 import com.dimi.moviedatabase.presentation.main.search.viewmodel.*
-import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragmentArgs
-import com.dimi.moviedatabase.util.Constants.LAYOUT_LIST_SPAN_COUNT
+import com.dimi.moviedatabase.presentation.common.BaseDBDialogFragment
 import com.dimi.moviedatabase.util.Genre
 import com.dimi.moviedatabase.util.SpacesItemDecoration
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.drawer_header_sort_by.*
-import kotlinx.android.synthetic.main.drawer_menu_item_layout.view.*
-import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.layout_search_toolbar.*
-import kotlinx.android.synthetic.main.layout_search_toolbar.view.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
@@ -52,33 +46,35 @@ import kotlin.let
 @FlowPreview
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
+class SearchFragment : BaseDBDialogFragment<FragmentSearchBinding>(R.layout.fragment_search),
     MediaListAdapter.Interaction,
     MediaListAdapter.Restoration,
     TabLayout.OnTabSelectedListener,
+    OnDataBindingClickListener,
     SwipeRefreshLayout.OnRefreshListener {
 
     val viewModel: SearchViewModel by viewModels()
 
-    private lateinit var genre: Genre
-    private lateinit var searchView: SearchView
-    private lateinit var recyclerAdapter: MediaListAdapter<Media>
+    private val drawerMenuSortItems = ArrayList<DrawerMenuItemLayoutBinding>()
 
-    private lateinit var searchQueryJob: Job
-    val searchQueryFlow = MutableStateFlow("")
+    private lateinit var genre: Genre
+    private lateinit var recyclerAdapter: MediaListAdapter<Media>
 
     private val args: SearchFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipe_refresh.setOnRefreshListener(this)
+        binding.listener = this
+        binding.viewModel = this.viewModel
+        binding.lifecycleOwner = this
+        binding.swipeRefresh.setOnRefreshListener(this)
 
         handleNavArgs()
 
         setupActionBar()
+        setupFilterDrawer()
 
-        setupFlowCollectors()
         subscribeObservers()
     }
 
@@ -94,22 +90,6 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
         genre = Genre(viewModel.getMediaType())
 
         setupTabs(args.tabId)
-    }
-
-    private fun setupFlowCollectors() {
-        searchQueryJob = Job()
-        CoroutineScope(Dispatchers.Main + searchQueryJob).launch {
-            searchQueryFlow
-                .debounce(300)
-                .filter {
-                    return@filter (viewModel.isValidQuery(it) && (it != viewModel.getSearchQuery()))
-                }
-                .distinctUntilChanged()
-                .flowOn(Dispatchers.Default)
-                .collect {
-                    handleSearchConfirmed(it)
-                }
-        }
     }
 
     private fun isRecyclerAdapterInitializer() = ::recyclerAdapter.isInitialized
@@ -141,6 +121,7 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
                         preloadGlideImages(
                             list = it
                         )
+                        if( viewState.page == 1 ) this@SearchFragment.resetUI(false)
                     }
                     submitList(
                         list = viewState.mediaList,
@@ -150,8 +131,6 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
             }
 
             setupSortFilter(viewState.sortFilter)
-            setupSortOrder(viewState.sortOrder)
-            setupLayoutMode(viewState.layoutSpanCount)
         })
 
         viewModel.shouldDisplayProgressBar.observe(viewLifecycleOwner, {
@@ -177,51 +156,33 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
         })
     }
 
-    private fun setupLayoutMode(layoutSpanCount: Int) {
-        if (layoutSpanCount == LAYOUT_LIST_SPAN_COUNT) {
-            layout_change.setImageDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_view_module
-                )
-            )
-        } else {
-            layout_change.setImageDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_view_list
-                )
-            )
-        }
-    }
-
     override fun onPause() {
         super.onPause()
         saveListPosition()
     }
 
     override fun saveListPosition() {
-        recycler_view.layoutManager?.onSaveInstanceState()?.let { lmState ->
+        binding.recyclerView.layoutManager?.onSaveInstanceState()?.let { lmState ->
             viewModel.setLayoutManagerState(lmState)
         }
     }
 
     override fun restoreListPosition() {
         viewModel.getLayoutManagerState()?.let { lmState ->
-            recycler_view?.layoutManager?.onRestoreInstanceState(lmState)
+            _binding?.let {
+                it.recyclerView.layoutManager?.onRestoreInstanceState(lmState)
+            }
         }
     }
 
-
     private fun initRecyclerView() {
 
-        recycler_view.apply {
+        binding.recyclerView.apply {
 
             layoutManager = StaggeredGridLayoutManager(
                 viewModel.getLayoutSpanCount(),
                 LinearLayoutManager.VERTICAL
             )
-            // setting gapStrategy so the spans don't mix up
             (layoutManager as StaggeredGridLayoutManager).gapStrategy =
                 StaggeredGridLayoutManager.GAP_HANDLING_NONE
 
@@ -236,7 +197,6 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
                     restoration = this@SearchFragment
                 )
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     if (!canScrollVertically(1)) {
@@ -248,26 +208,20 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
         }
     }
 
-    private fun handleSearchConfirmed(searchQuery: String) {
-
-        viewModel.setQuery(searchQuery).let {
-            onMovieSearch(false)
-        }
-    }
-
     override fun onDestroyView() {
+        binding.recyclerView.adapter = null
         super.onDestroyView()
-        searchQueryJob.cancel()
-        recycler_view.adapter = null
     }
 
     private fun setupTabs(forceSelect: Int) {
         when (viewModel.getViewType()) {
             ViewType.NONE -> {
                 for (item in MediaListType.values()) {
-                    tabs.addTab(
-                        tabs.newTab().apply {
-                            text = item.name
+                    binding.tabs.addTab(
+                        binding.tabs.newTab().apply {
+                            text =
+                                if (item == MediaListType.UPCOMING_OR_ON_THE_AIR && viewModel.getMediaType() == MediaType.TV_SHOW) "On The Air"
+                                else item.originalName
                         },
                         false
                     )
@@ -276,12 +230,12 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
                 }
             }
             ViewType.NETWORK -> {
-                tabs.gone()
+                binding.tabs.gone()
             }
             ViewType.GENRE -> {
                 for ((index, g) in genre.getAllGenreIds().withIndex()) {
-                    tabs.addTab(
-                        tabs.newTab().apply {
+                    binding.tabs.addTab(
+                        binding.tabs.newTab().apply {
                             text = genre.getGenreName(g)
                         },
                         false
@@ -294,8 +248,8 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
             }
             ViewType.SEARCH -> {
                 for (item in MediaType.values()) {
-                    tabs.addTab(
-                        tabs.newTab().apply {
+                    binding.tabs.addTab(
+                        binding.tabs.newTab().apply {
                             text = item.pluralName
                         },
                         false
@@ -305,32 +259,32 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
             }
         }
 
-        if (tabs.isVisible) {
+        if (binding.tabs.isVisible) {
             // add listener after first tab is selected and this way we will not trigger movieSearch 2 or more times
             // and back from viewModel will we properly be restored to right list
             // handler used bcs selected view is not scrolled
             Handler().postDelayed({
-                tabs.getTabAt(viewModel.getSelectedTab())?.select()
-                tabs.addOnTabSelectedListener(this)
+                binding.tabs.getTabAt(viewModel.getSelectedTab())?.select()
+                binding.tabs.addOnTabSelectedListener(this)
             }, 1)
         }
     }
 
     override fun onRefresh() {
         onMovieSearch()
-        swipe_refresh.isRefreshing = false
+        binding.swipeRefresh.isRefreshing = false
     }
 
-    private fun onMovieSearch(leaveSearchView: Boolean = true) {
+    private fun onMovieSearch() {
         viewModel.loadFirstPage()
-        resetUI(leaveSearchView)
+        resetUI()
     }
 
     private fun resetUI(leaveSearchView: Boolean = true) {
-        recycler_view.smoothScrollToPosition(0)
+        binding.recyclerView.smoothScrollToPosition(0)
         if (leaveSearchView) {
             uiController.hideSoftKeyboard()
-            focusable_view.requestFocus()
+            binding.focusableView.requestFocus()
         }
     }
 
@@ -381,184 +335,107 @@ class SearchFragment : BaseDialogFragment(R.layout.fragment_search),
     }
 
     private fun setupActionBar() {
-
-        view?.let { v ->
-
-            val view = View.inflate(
-                v.context,
-                R.layout.layout_search_toolbar,
-                null
-            )
-            view.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-            toolbar_content_container.addView(view)
-            when (viewModel.getViewType()) {
-                ViewType.SEARCH -> {
-                    initSearchView()
-                    toolbar_content_container.filter.gone()
-                }
-                ViewType.GENRE -> {
-                    toolbar_content_container.toolbar_name.apply {
-                        text = viewModel.getMediaType().pluralName
-                        visible()
-                    }
-                    setupFilterDrawer()
-                    toolbar_content_container.filter.setOnClickListener {
-                        if (drawer_layout.isDrawerOpen(GravityCompat.END))
-                            drawer_layout.closeDrawer(
-                                GravityCompat.END
-                            )
-                        else
-                            drawer_layout.openDrawer(GravityCompat.END)
-                    }
-                }
-                ViewType.NONE -> {
-                    toolbar_content_container.toolbar_name.apply {
-                        text = viewModel.getMediaType().pluralName
-                        visible()
-                    }
-                    toolbar_content_container.filter.gone()
-                }
-                ViewType.NETWORK -> {
-                    toolbar_content_container.toolbar_name.apply {
-                        text = viewModel.getNetwork()?.name
-                        visible()
-                    }
-                    setupFilterDrawer()
-                    toolbar_content_container.filter.setOnClickListener {
-                        if (drawer_layout.isDrawerOpen(GravityCompat.END))
-                            drawer_layout.closeDrawer(
-                                GravityCompat.END
-                            )
-                        else
-                            drawer_layout.openDrawer(GravityCompat.END)
-                    }
-                }
-            }
-
-            toolbar_content_container.layout_change.setOnClickListener {
-                recyclerAdapter.changeViewLayout()?.let { layout ->
-                    viewModel.saveLayoutMode(layout.spanCount)
-                }
-            }
-
-            toolbar_content_container.arrow_back.setOnClickListener {
-                findNavController().popBackStack()
-            }
-        }
-    }
-
-    private fun setupSortOrder(sortOrder: SortOrder) {
-        val colorHoloLightRed = ContextCompat.getColor(
-            requireContext(),
-            android.R.color.holo_red_light
-        )
-        val colorSecondaryText = ContextCompat.getColor(
-            requireContext(),
-            R.color.colorSecondaryText
-        )
-
-        when (sortOrder) {
-            SortOrder.ASCENDING -> {
-                asc_button.setTextAndCompoundDrawablesColor(colorHoloLightRed)
-                desc_button.setTextAndCompoundDrawablesColor(colorSecondaryText)
-            }
-            SortOrder.DESCENDING -> {
-                desc_button.setTextAndCompoundDrawablesColor(colorHoloLightRed)
-                asc_button.setTextAndCompoundDrawablesColor(colorSecondaryText)
-            }
-        }
+        if (viewModel.getViewType() == ViewType.SEARCH )
+            initSearchView()
     }
 
     private fun setupSortFilter(sortFilter: SortFilter) {
-        for (index in 0..drawer_menu_container.childCount) {
-            drawer_menu_container.getChildAt(index)?.let {
-                it as LinearLayout
-                if (it.item_name.text != sortFilter.upperCaseName)
-                    it.check.invisible()
-                else it.check.visible()
-            }
+
+        for (item in drawerMenuSortItems) {
+            item.checked = item.itemName.text == sortFilter.upperCaseName
         }
     }
 
 
     private fun setupFilterDrawer() {
 
-        drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
 
-        drawer_done.setOnClickListener {
-            if (drawer_layout.isDrawerOpen(GravityCompat.END))
-                drawer_layout.closeDrawer(GravityCompat.END)
-        }
-
-        asc_button.setOnClickListener {
-            viewModel.enableSortByASC()
-            resetUI()
-        }
-
-        desc_button.setOnClickListener {
-            viewModel.enableSortByDESC()
-            resetUI()
-        }
-
-        if (drawer_menu_container.childCount < SortFilter.values().size)
+        if (binding.drawerHeader.drawerMenuContainer.childCount < SortFilter.values().size)
             for (item in SortFilter.values()) {
 
                 if (item == SortFilter.BY_VOTE_COUNT && viewModel.getMediaType() != MediaType.MOVIE)
                     continue
 
-                val newView = layoutInflater.inflate(
-                    R.layout.drawer_menu_item_layout,
-                    drawer_menu_container,
+                val drawerItemBinding = DrawerMenuItemLayoutBinding.inflate(
+                    layoutInflater,
+                    binding.drawerHeader.drawerMenuContainer,
                     false
-                ).apply {
+                )
+                drawerMenuSortItems.add(drawerItemBinding)
+                drawerItemBinding.root.apply {
                     layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                     ).apply {
                         setMargins(0, 0, 0, 12)
                     }
-                    item_name.text = item.upperCaseName
-                    item_name.setOnClickListener {
-                        when (item) {
-                            SortFilter.BY_POPULARITY -> {
-                                viewModel.enableSortByPopularity()
-                            }
-                            SortFilter.BY_FIRST_AIR_DATE -> {
-                                viewModel.enableSortByFirstAirDate()
-                            }
-                            SortFilter.BY_VOTE_COUNT -> {
-                                viewModel.enableSortByVoteAverage()
-                            }
-                        }
-                        resetUI()
-                    }
                 }
-                drawer_menu_container.addView(newView)
+                drawerItemBinding.itemName.text = item.upperCaseName
+                drawerItemBinding.itemName.setOnClickListener {
+                    when (item) {
+                        SortFilter.BY_POPULARITY -> {
+                            viewModel.enableSortByPopularity()
+                        }
+                        SortFilter.BY_FIRST_AIR_DATE -> {
+                            viewModel.enableSortByFirstAirDate()
+                        }
+                        SortFilter.BY_VOTE_COUNT -> {
+                            viewModel.enableSortByVoteAverage()
+                        }
+                    }
+                    resetUI()
+                }
+                binding.drawerHeader.drawerMenuContainer.addView(drawerItemBinding.root)
             }
     }
 
     private fun initSearchView() {
+        binding.toolbarContentContainer.searchView.apply {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
 
-        val searchViewToolbar: Toolbar? = toolbar_content_container.search_toolbar
-        searchViewToolbar?.let { toolbar ->
-            searchView = toolbar.search_view
-            searchView.apply {
+                override fun onQueryTextChange(newText: String): Boolean {
+                    viewModel.setSearchQuery(newText)
+                    return true
+                }
+            })
+            visible()
+        }
+    }
 
-                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        return true
-                    }
-
-                    override fun onQueryTextChange(newText: String): Boolean {
-                        searchQueryFlow.value = newText
-                        return true
-                    }
-                })
-                visible()
+    override fun onClick(view: View) {
+        when (view.id) {
+            binding.drawerHeader.ascButton.id -> {
+                viewModel.enableSortByASC()
+                resetUI()
+            }
+            binding.drawerHeader.descButton.id -> {
+                viewModel.enableSortByDESC()
+                resetUI()
+            }
+            binding.drawerHeader.drawerDone.id -> {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
+            }
+            binding.toolbarContentContainer.layoutChange.id -> {
+                recyclerAdapter.changeViewLayout()?.let { layout ->
+                    viewModel.saveLayoutMode(layout.spanCount)
+                }
+            }
+            binding.toolbarContentContainer.arrowBack.id -> {
+                findNavController().popBackStack()
+            }
+            binding.toolbarContentContainer.filter.id -> {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
+                    binding.drawerLayout.closeDrawer(
+                        GravityCompat.END
+                    )
+                else
+                    binding.drawerLayout.openDrawer(GravityCompat.END)
             }
         }
     }

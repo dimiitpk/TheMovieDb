@@ -2,8 +2,8 @@ package com.dimi.moviedatabase.business.data.network.abstraction
 
 import com.dimi.moviedatabase.business.data.network.responses.TvShowSearchResponse
 import com.dimi.moviedatabase.business.domain.model.*
-import com.dimi.moviedatabase.presentation.main.search.SortFilter
-import com.dimi.moviedatabase.presentation.main.search.SortOrder
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
+import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 
 interface TvShowNetworkDataSource {

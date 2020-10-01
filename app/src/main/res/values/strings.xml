@@ -21,6 +21,7 @@
     <string name="movies_amount_format">%d movies</string>
     <string name="persons_amount_format">%d persons</string>
     <string name="episodes_amount_format">%d episodes</string>
+    <string name="episodes_brackets_format">(%d episodes)</string>
     <string name="posters_amount_format">%d posters</string>
     <string name="backdrop_amount_format">%d backdrops</string>
     <string name="number_slash_number">%1$d/%2$d</string>

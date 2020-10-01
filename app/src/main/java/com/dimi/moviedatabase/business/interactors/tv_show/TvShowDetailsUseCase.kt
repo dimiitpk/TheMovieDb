@@ -53,67 +53,60 @@ class TvShowDetailsUseCase(
 
                         cacheDataSource.insertTvShow(networkObject, upsert = true)
 
-                        networkObject.castList?.let { castList ->
-                            if (castList.isNotEmpty()) {
-                                for (cast in castList) {
-                                    try {
-                                        launch {
-                                            printLogD(
-                                                "TvShowDetails",
-                                                "updateLocalDb: inserting cast: $cast"
-                                            )
-                                            cacheDataSource.insertCast(cast, networkObject.id)
-                                        }
-
-                                    } catch (e: Exception) {
-                                        printLogE(
-                                            "TvShowDetails",
-                                            "updateLocalDb: error updating cache data on cast with name: ${cast.name}. " + "${e.message}"
-                                        )
-                                    }
+                        networkObject.castList?.forEach { person ->
+                            try {
+                                launch {
+                                    printLogD(
+                                        "TvShowDetails",
+                                        "updateLocalDb: inserting cast: $person"
+                                    )
+                                    cacheDataSource.insertCast(person, networkObject.id)
                                 }
+
+                            } catch (e: Exception) {
+                                printLogE(
+                                    "TvShowDetails",
+                                    "updateLocalDb: error updating cache data on cast with name: ${person.name}. " + "${e.message}"
+                                )
                             }
                         }
-                        networkObject.networks?.let { networks ->
-                            if (networks.isNotEmpty()) {
-                                for (network in networks) {
-                                    try {
-                                        launch {
-                                            printLogD(
-                                                "TvShowDetails",
-                                                "updateLocalDb: inserting network: $network"
-                                            )
-                                            cacheDataSource.insertNetwork(network, networkObject.id)
-                                        }
 
-                                    } catch (e: Exception) {
-                                        printLogE(
-                                            "TvShowDetails",
-                                            "updateLocalDb: error updating cache data on network with name: ${network.name}. " + "${e.message}"
-                                        )
-                                    }
+
+                        networkObject.networks?.forEach { network ->
+                            try {
+                                launch {
+                                    printLogD(
+                                        "TvShowDetails",
+                                        "updateLocalDb: inserting network: $network"
+                                    )
+                                    cacheDataSource.insertNetwork(network, networkObject.id)
                                 }
+
+                            } catch (e: Exception) {
+                                printLogE(
+                                    "TvShowDetails",
+                                    "updateLocalDb: error updating cache data on network with name: ${network.name}. " + "${e.message}"
+                                )
                             }
                         }
-                        networkObject.seasons?.let { seasons ->
-                            if (seasons.isNotEmpty()) {
-                                for ( season in seasons) {
-                                    try {
-                                        launch {
-                                            printLogD(
-                                                "TvShowDetails",
-                                                "updateLocalDb: inserting season: $season"
-                                            )
-                                            cacheDataSource.insertSeason(season, networkObject.id)
-                                        }
 
-                                    } catch (e: Exception) {
-                                        printLogE(
-                                            "TvShowDetails",
-                                            "updateLocalDb: error updating cache data on season with name: ${season.seasonName}. " + "${e.message}"
-                                        )
-                                    }
+
+
+                        networkObject.seasons?.forEach { season ->
+                            try {
+                                launch {
+                                    printLogD(
+                                        "TvShowDetails",
+                                        "updateLocalDb: inserting season: $season"
+                                    )
+                                    cacheDataSource.insertSeason(season, networkObject.id)
                                 }
+
+                            } catch (e: Exception) {
+                                printLogE(
+                                    "TvShowDetails",
+                                    "updateLocalDb: error updating cache data on season with name: ${season.seasonName}. " + "${e.message}"
+                                )
                             }
                         }
 

@@ -103,12 +103,10 @@ abstract class BaseViewModel<ViewState : ViewStateInterface> (
     }
 
     fun setViewState(viewState: ViewState){
-        println("MRKNA: SetViewState")
         _viewState.value = viewState
     }
 
     fun clearStateMessage(index: Int = 0){
-        Log.d("BaseViewModel", "clearStateMessage")
         dataChannelManager.clearStateMessage(index)
     }
 

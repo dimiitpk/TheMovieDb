@@ -77,6 +77,6 @@ data class ViewMediaViewState(
         const val MEDIA_DETAILS = "com.dimi.moviedatabase.presentation.main.view.state.MEDIA_DETAILS"
         const val TV_SHOW_EPISODES = "com.dimi.moviedatabase.presentation.main.view.state.TV_SHOW_EPISODES"
 
-        const val BUNDLE_KEY = "com.dimi.moviedatabase.presentation.main.view.state.ViewMediaViewState"
+        fun getBundleKey() = ViewMediaViewState::class.java.`package`?.name + "." + ViewMediaViewState::class.simpleName
     }
 }

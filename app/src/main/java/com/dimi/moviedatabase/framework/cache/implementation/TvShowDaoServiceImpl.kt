@@ -8,7 +8,6 @@ import com.dimi.moviedatabase.framework.cache.mappers.CacheMapper
 import com.dimi.moviedatabase.framework.cache.model.junction.TvShowActorsCrossRef
 import com.dimi.moviedatabase.framework.cache.model.junction.TvShowListCrossRef
 import com.dimi.moviedatabase.framework.cache.model.junction.TvShowNetworkCrossRef
-import com.dimi.moviedatabase.presentation.main.search.SortFilter
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.util.GENRE_DEFAULT
 

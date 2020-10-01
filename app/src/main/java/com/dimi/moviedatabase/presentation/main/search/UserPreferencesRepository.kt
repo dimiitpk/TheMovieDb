@@ -3,6 +3,8 @@ package com.dimi.moviedatabase.presentation.main.search
 import android.content.Context
 import androidx.datastore.DataStore
 import androidx.datastore.preferences.*
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
+import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.util.Constants.LAYOUT_GRID_SPAN_COUNT
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -11,17 +13,6 @@ import java.io.IOException
 
 private const val USER_PREFERENCES_NAME = "user_preferences"
 
-
-enum class SortFilter(val value: String, val upperCaseName: String) {
-    BY_POPULARITY("popularity", "Popularity"),
-    BY_FIRST_AIR_DATE("first_air_date", "Release date"),
-    BY_VOTE_COUNT("vote_count", "Vote Count")
-}
-
-enum class SortOrder(val value: String) {
-    ASCENDING("asc"),
-    DESCENDING("desc")
-}
 
 data class UserPreferences(
     val sortFilter: SortFilter,

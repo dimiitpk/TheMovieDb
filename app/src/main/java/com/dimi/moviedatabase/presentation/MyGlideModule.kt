@@ -17,7 +17,8 @@ import com.dimi.moviedatabase.R
             builder.setDefaultRequestOptions(
                 RequestOptions()
                     .placeholder(R.drawable.ic_image_place_holder)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .fallback(R.drawable.ic_no_image)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .transform(RoundedCorners(25))
                     .error(R.drawable.ic_broken_image)
             )

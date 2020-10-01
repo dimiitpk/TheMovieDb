@@ -1,9 +1,6 @@
 package com.dimi.moviedatabase.presentation.main.view.viewmodel
 
-import com.dimi.moviedatabase.business.domain.model.Episode
-import com.dimi.moviedatabase.business.domain.model.Media
-import com.dimi.moviedatabase.business.domain.model.Season
-import com.dimi.moviedatabase.business.domain.model.Video
+import com.dimi.moviedatabase.business.domain.model.*
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.presentation.main.view.state.SeasonContainerState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,6 +27,22 @@ fun ViewMediaViewModel.getMediaType(): MediaType {
 fun ViewMediaViewModel.getTrailers(): List<Video>? {
     getCurrentViewStateOrNew().let {
         return it.trailers
+    }
+}
+
+@FlowPreview
+@ExperimentalCoroutinesApi
+fun ViewMediaViewModel.isThereAnyValidPoster() : Boolean {
+    getCurrentViewStateOrNew().let {
+        return !it.posters.isNullOrEmpty()
+    }
+}
+
+@FlowPreview
+@ExperimentalCoroutinesApi
+fun ViewMediaViewModel.isThereAnyValidBackdrop() : Boolean {
+    getCurrentViewStateOrNew().let {
+        return !it.backdrops.isNullOrEmpty()
     }
 }
 

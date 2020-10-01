@@ -50,7 +50,7 @@ class TvShowTrailersUseCase(
                     )
                     DataState.data(
                         response = Response(
-                            message = RETRIEVING_TRAILERS_SUCCESSFUL,
+                            message = USE_CASE_TRAILERS,
                             messageType = MessageType.Success,
                             uiComponentType = UIComponentType.None
                         ),
@@ -66,9 +66,6 @@ class TvShowTrailersUseCase(
     }
 
     companion object {
-        const val RETRIEVING_TRAILERS_SUCCESSFUL =
-            "Successfully retrieved trailers for this movie."
-
         const val RETRIEVING_TRAILERS_FAILED =
             "Failed retrieving trailers for this movie."
     }

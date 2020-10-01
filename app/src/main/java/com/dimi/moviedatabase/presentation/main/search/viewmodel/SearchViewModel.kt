@@ -9,16 +9,18 @@ import com.dimi.moviedatabase.business.interactors.movie.MovieUseCases
 import com.dimi.moviedatabase.business.interactors.people.PeopleUseCases
 import com.dimi.moviedatabase.business.interactors.tv_show.TvShowUseCases
 import com.dimi.moviedatabase.presentation.common.BaseViewModel
-import com.dimi.moviedatabase.presentation.main.search.SortFilter
-import com.dimi.moviedatabase.presentation.main.search.SortOrder
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
+import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.presentation.main.search.UserPreferencesRepository
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
 import com.dimi.moviedatabase.presentation.main.search.state.SearchStateEvent.*
 import com.dimi.moviedatabase.presentation.main.search.state.SearchViewState
 import com.dimi.moviedatabase.util.cutList
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -34,12 +36,32 @@ constructor(
 
     val userPreferencesFlowLiveData = userPreferencesRepository.userPreferencesFlow.asLiveData()
 
+    private val searchQueryFlow = MutableStateFlow("")
+
+    fun setSearchQuery(query: String) {
+        searchQueryFlow.value = query
+    }
+
+    init {
+        viewModelScope.launch {
+            searchQueryFlow
+                .debounce(300)
+                .filter {
+                    return@filter (isValidQuery(it) && (it != getSearchQuery()))
+                }
+                .distinctUntilChanged()
+                .flowOn(Dispatchers.Default)
+                .collect {
+                    loadFirstPage(it)
+                }
+        }
+    }
+
     override fun handleNewData(data: SearchViewState) {
         data.let { viewState ->
             viewState.mediaList?.let {
                 when (getViewType()) {
                     ViewType.GENRE, ViewType.NETWORK -> {
-                        println("LISTA BRE PRE $it")
                         setDataList(
                             filterList(
                                 it,
@@ -117,7 +139,7 @@ constructor(
         launchJob(stateEvent, job)
     }
 
-    fun isValidQuery(query: String): Boolean {
+    private fun isValidQuery(query: String): Boolean {
         return (query.isNotBlank() && query.length >= 2)
     }
 
@@ -128,7 +150,7 @@ constructor(
     }
 
     override fun getUniqueViewStateIdentifier(): String {
-        return SearchViewState.BUNDLE_KEY
+        return SearchViewState.getBundleKey()
     }
 
     private fun filterList(

@@ -17,13 +17,15 @@ fun AppCompatActivity.displayToast(
 }
 
 fun AppCompatActivity.displayPermissionsRequiredDialog(
-    rationaleMessage: String
+    rationaleMessage: String,
+    positiveButtonFun: () -> Unit
 ) : MaterialDialog {
     return MaterialDialog(this)
         .show{
             title(R.string.permission_required)
             message(text = rationaleMessage)
             positiveButton(R.string.allow){
+                positiveButtonFun()
                 dismiss()
             }
             negativeButton(R.string.deny) {
@@ -79,10 +81,4 @@ fun AppCompatActivity.displayInfoDialog(
             }
             cancelable(false)
         }
-}
-
-fun PagerSnapHelper.getSnapPosition(recyclerView: RecyclerView): Int {
-    val layoutManager = recyclerView.layoutManager ?: return RecyclerView.NO_POSITION
-    val snapView = findSnapView(layoutManager) ?: return RecyclerView.NO_POSITION
-    return layoutManager.getPosition(snapView)
 }

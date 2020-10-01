@@ -6,14 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.dimi.moviedatabase.BR
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.business.domain.model.Person
 import com.dimi.moviedatabase.business.domain.state.MediaType
+import com.dimi.moviedatabase.databinding.LayoutCastListItemBinding
+import com.dimi.moviedatabase.databinding.LayoutMediaDetailListItemBinding
+import com.dimi.moviedatabase.databinding.LayoutMediaSimpleListItemBinding
 import com.dimi.moviedatabase.framework.network.NetworkConstants.SMALL_IMAGE_URL_PREFIX
+import com.dimi.moviedatabase.presentation.common.OnDataBindingClickListener
 import com.dimi.moviedatabase.presentation.common.gone
 import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.util.Constants.LAYOUT_LIST_SPAN_COUNT
@@ -56,33 +62,19 @@ class MediaListAdapter<T : Media>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val view: View = when (viewType) {
+        val binding = when (viewType) {
             RecyclerViewLayoutState.DETAIL_LAYOUT_PERSON_STATE.ordinal ->
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.layout_cast_list_item,
-                    parent,
-                    false
-                )
+                LayoutCastListItemBinding.inflate(LayoutInflater.from(parent.context), parent ,false )
             RecyclerViewLayoutState.DETAIL_LAYOUT_STATE.ordinal ->
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.layout_media_detail_list_item,
-                    parent,
-                    false
-                )
+                LayoutMediaDetailListItemBinding.inflate(LayoutInflater.from(parent.context), parent ,false )
             else ->
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.layout_media_simple_list_item,
-                    parent,
-                    false
-                )
+                LayoutMediaSimpleListItemBinding.inflate(LayoutInflater.from(parent.context), parent ,false )
         }
 
         return MediaViewHolder(
-            view,
-            recyclerViewLayoutState = viewType,
+            binding,
             interaction = interaction,
             restoration = restoration,
-            requestManager = requestManager,
             resize = resize
         )
 
@@ -189,74 +181,28 @@ class MediaListAdapter<T : Media>(
 
     class MediaViewHolder
     constructor(
-        itemView: View,
-        private val recyclerViewLayoutState: Int,
-        private val requestManager: RequestManager,
+        private val binding: ViewDataBinding,
         private val interaction: Interaction?,
         private val restoration: Restoration?,
         private val resize: Boolean = false
-    ) : RecyclerView.ViewHolder(itemView) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Media) = with(itemView) {
 
-            if (resize) {
+            binding.setVariable(BR.media, item)
+            binding.executePendingBindings()
+
+            if (resize && binding is LayoutMediaSimpleListItemBinding) {
                 val size = Point()
                 (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getSize(
                     size
                 )
-                movie_item_container.layoutParams.width = size.x / 4
+                binding.movieItemContainer.layoutParams.width = size.x / 4
             }
 
             itemView.setOnClickListener {
                 restoration?.saveListPosition()
                 interaction?.onItemSelected(absoluteAdapterPosition, item)
-            }
-
-
-            when (recyclerViewLayoutState) {
-                RecyclerViewLayoutState.DETAIL_LAYOUT_PERSON_STATE.ordinal -> {
-                    requestManager
-                        .load(SMALL_IMAGE_URL_PREFIX + item.posterPath)
-                        .circleCrop()
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(itemView.cast_image)
-
-                    itemView.cast_name.text = item.title
-
-                    item.character?.let { character ->
-                        itemView.cast_character.text =
-                            resources.getString(R.string.as_string_format, character)
-                    } ?: run { itemView.cast_character.text = item.overview }
-                }
-                RecyclerViewLayoutState.DETAIL_LAYOUT_STATE.ordinal -> {
-                    requestManager
-                        .load(SMALL_IMAGE_URL_PREFIX + item.posterPath)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(itemView.detail_view_image)
-
-                    itemView.detail_view_title.text = item.title
-                    itemView.detail_view_date.text = item.releaseDate.toSimpleString()
-                    itemView.detail_view_vote_average.text = item.voteAverage.toString()
-
-                    item.character?.let { character ->
-                        itemView.detail_view_overview.text =
-                            resources.getString(R.string.as_string_format, character)
-                    } ?: run { itemView.detail_view_overview.text = item.overview }
-                }
-                RecyclerViewLayoutState.SIMPLE_LAYOUT_STATE.ordinal -> {
-                    requestManager
-                        .load(SMALL_IMAGE_URL_PREFIX + item.posterPath)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(itemView.simple_view_image)
-
-                    itemView.simple_view_title.text = item.title
-                    if (item.mediaType != MediaType.PERSON) {
-                        itemView.simple_view_vote_average.text = item.voteAverage.toString()
-                        itemView.simple_view_vote_average.visible()
-                    }
-                    else
-                        itemView.simple_view_vote_average.gone()
-                }
             }
         }
     }

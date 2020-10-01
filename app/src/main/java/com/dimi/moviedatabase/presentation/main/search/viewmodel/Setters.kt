@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.business.domain.model.Network
 import com.dimi.moviedatabase.business.domain.state.MediaType
-import com.dimi.moviedatabase.presentation.main.search.SortFilter
-import com.dimi.moviedatabase.presentation.main.search.SortOrder
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
+import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
 import com.dimi.moviedatabase.util.GENRE_DEFAULT

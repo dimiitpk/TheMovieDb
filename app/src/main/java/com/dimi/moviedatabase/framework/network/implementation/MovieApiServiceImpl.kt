@@ -6,8 +6,8 @@ import com.dimi.moviedatabase.business.domain.model.*
 import com.dimi.moviedatabase.framework.network.NetworkConstants
 import com.dimi.moviedatabase.framework.network.api.MovieApi
 import com.dimi.moviedatabase.framework.network.mappers.NetworkMapper
-import com.dimi.moviedatabase.presentation.main.search.SortFilter
-import com.dimi.moviedatabase.presentation.main.search.SortOrder
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
+import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.util.GENRE_DEFAULT
 import com.dimi.moviedatabase.util.Keys

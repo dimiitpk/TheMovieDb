@@ -11,8 +11,8 @@ import com.dimi.moviedatabase.business.domain.state.MessageType
 import com.dimi.moviedatabase.business.domain.state.Response
 import com.dimi.moviedatabase.business.domain.state.StateEvent
 import com.dimi.moviedatabase.business.domain.state.UIComponentType
-import com.dimi.moviedatabase.presentation.main.search.SortFilter
-import com.dimi.moviedatabase.presentation.main.search.SortOrder
+import com.dimi.moviedatabase.presentation.common.enums.SortFilter
+import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.util.GENRE_DEFAULT
 import com.dimi.moviedatabase.util.printLogD
@@ -76,7 +76,7 @@ class SearchTvShowsUseCase(
             val tvShowList: List<TvShow>
 
             if (networkObject.totalResults == 0) {
-                message = "$SEARCH_NO_MATCHING_RESULTS $query"
+                message = if( query.isNotBlank() )"$SEARCH_NO_MATCHING_RESULTS $query" else SEARCH_FAILED
                 componentType = UIComponentType.Toast
                 messageType = MessageType.Error
             } else {
@@ -127,7 +127,7 @@ class SearchTvShowsUseCase(
         override suspend fun setViewState(finalResult: List<TvShow>): Response? {
             return if (finalResult.isNullOrEmpty()) {
                 Response(
-                    message = "$SEARCH_NO_MATCHING_RESULTS $query",
+                    message = if( query.isNotBlank() )"$SEARCH_NO_MATCHING_RESULTS $query" else SEARCH_FAILED,
                     uiComponentType = UIComponentType.Toast,
                     messageType = MessageType.Error
                 )

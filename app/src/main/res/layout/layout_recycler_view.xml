@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/layout_rv_container"
-    android:background="@android:color/transparent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
 
-    <LinearLayout
-        android:id="@+id/recycler_view_info_container"
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:id="@+id/layout_rv_container"
+        android:background="@android:color/transparent">
+
+
+        <LinearLayout
+            android:id="@+id/recycler_view_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/chewy"
+                android:gravity="start"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/view_layout_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/chewy"
+                android:gravity="end"
+                android:text="@string/view"
+                android:textColor="@android:color/holo_red_light"
+                android:visibility="invisible"
+                app:drawableEndCompat="@drawable/ic_view_list"
+                app:drawableTint="@android:color/holo_red_light" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/info_text"
+            android:id="@+id/empty_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:drawablePadding="5dp"
             android:fontFamily="@font/chewy"
-            android:gravity="start"
-            android:textColor="@color/colorPrimaryText" />
-
-        <TextView
-            android:id="@+id/view_layout_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/chewy"
-            android:gravity="end"
-            android:text="@string/view"
-            android:textColor="@android:color/holo_red_light"
+            android:padding="5dp"
+            android:text="@string/request_data_error"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
             android:visibility="invisible"
-            app:drawableEndCompat="@drawable/ic_view_list"
-            app:drawableTint="@android:color/holo_red_light" />
+            app:drawableTopCompat="@drawable/ic_mood_bad_black_24dp" />
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/empty_list_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:drawablePadding="5dp"
-        android:fontFamily="@font/chewy"
-        android:padding="5dp"
-        android:text="@string/request_data_error"
-        android:textColor="@color/colorSecondaryText"
-        android:textSize="16sp"
-        android:visibility="invisible"
-        app:drawableTopCompat="@drawable/ic_mood_bad_black_24dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recycler_view_info_container"
-        android:background="@android:color/transparent" />
-</RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recycler_view_info_container"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
+</layout>

@@ -11,6 +11,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Season
+import com.dimi.moviedatabase.databinding.LayoutSeasonListItemBinding
 import com.dimi.moviedatabase.framework.network.NetworkConstants.SMALL_IMAGE_URL_PREFIX
 import com.dimi.moviedatabase.presentation.GlideApp
 import kotlinx.android.synthetic.main.layout_episode_list_item.view.*
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.layout_season_list_item.view.*
 import kotlinx.android.synthetic.main.layout_season_list_item.view.image
 
 class SeasonAdapter(
-
     private val requestManager: RequestManager,
     private val interaction: Interaction? = null
 ) :
@@ -41,12 +41,11 @@ class SeasonAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return SeasonViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.layout_season_list_item,
+            LayoutSeasonListItemBinding.inflate(
+                LayoutInflater.from(parent.context),
                 parent,
                 false
             ),
-            requestManager,
             interaction
         )
     }
@@ -68,7 +67,6 @@ class SeasonAdapter(
         list: List<Season>
     ) {
         for (season in list) {
-
             if (season.posterPath != null)
                 requestManager
                     .load(SMALL_IMAGE_URL_PREFIX + season.posterPath)
@@ -82,25 +80,15 @@ class SeasonAdapter(
 
     class SeasonViewHolder
     constructor(
-        itemView: View,
-        private val requestManager: RequestManager,
+        private val binding: LayoutSeasonListItemBinding,
         private val interaction: Interaction?
-    ) : RecyclerView.ViewHolder(itemView) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Season) = with(itemView) {
-
-            itemView.arrow_select_season.setOnClickListener {
+        fun bind(item: Season)  {
+            binding.season = item
+            binding.arrowSelectSeason.setOnClickListener {
                 interaction?.onItemSelected(absoluteAdapterPosition, item)
             }
-
-            requestManager
-                .load(SMALL_IMAGE_URL_PREFIX + item.posterPath)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(itemView.image)
-
-            itemView.episodes_text.text = "(${item.episodeCount}episodes)"
-            itemView.season_name.text = item.seasonName
-            itemView.season_overview.text = item.overview
         }
     }
 

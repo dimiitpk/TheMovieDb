@@ -140,10 +140,19 @@ constructor(
 
 
     override fun getViewStateCopyWithoutBigLists(viewState: HomeViewState): HomeViewState {
-        return viewState.copy(popularMovies = ArrayList())
+        return viewState.copy(
+            popularMovies = emptyList(),
+            popularTvShows = emptyList(),
+            trendingMovies = emptyList(),
+            trendingTvShows = emptyList(),
+            topRatedMovies = emptyList(),
+            topRatedTvShows = emptyList(),
+            upcomingMovies = emptyList(),
+            onTheAirTvShows = emptyList()
+        )
     }
 
     override fun getUniqueViewStateIdentifier(): String {
-        return HomeViewState.BUNDLE_KEY
+        return HomeViewState.getBundleKey()
     }
 }

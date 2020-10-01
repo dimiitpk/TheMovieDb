@@ -35,8 +35,8 @@ object RoomModule {
         )
             .fallbackToDestructiveMigration()
             .addCallback(object : RoomDatabase.Callback() {
-                override fun onOpen(db: SupportSQLiteDatabase) {
-                    super.onOpen(db)
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
                     CoroutineScope(IO).launch {
                         for( item in MediaListType.values()) {
                             val contentValues = ContentValues()
@@ -44,7 +44,7 @@ object RoomModule {
                             contentValues.put("name", item.name)
                             db.insert("media_list", OnConflictStrategy.IGNORE, contentValues)
                         }
-                    }
+                   }
                 }
             })
             .build()

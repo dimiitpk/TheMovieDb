@@ -1,81 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/search_toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBackground"
-    android:theme="@style/AppTheme.Toolbar">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <import type="com.dimi.moviedatabase.presentation.main.search.enums.ViewType"/>
+        <variable
+            name="listener"
+            type="com.dimi.moviedatabase.presentation.common.OnDataBindingClickListener" />
+        <variable
+            name="viewModel"
+            type="com.dimi.moviedatabase.presentation.main.search.viewmodel.SearchViewModel" />
+    </data>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/search_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:theme="@style/AppTheme.Toolbar">
 
-        <ImageView
-            android:id="@+id/arrow_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="start"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/search_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorPrimaryLight" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/toolbar_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:fontFamily="@font/chewy"
-            android:textColor="@color/colorPrimaryLight"
-            android:textSize="20sp"
-            android:layout_marginStart="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/filter"
-            app:layout_constraintStart_toEndOf="@+id/arrow_back"
-            app:layout_constraintTop_toTopOf="parent"/>
+            <ImageView
+                android:id="@+id/arrow_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{listener::onClick}"
+                android:layout_gravity="start"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/search_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorPrimaryLight" />
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:imeOptions="flagNoExtractUi|actionSearch"
-            android:queryHint="@string/search"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/filter"
-            app:layout_constraintStart_toStartOf="@+id/arrow_back"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/toolbar_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:viewType="@{viewModel.viewState.viewType}"
+                android:mediaType="@{viewModel.viewState.mediaType}"
+                android:network="@{viewModel.viewState.network}"
+                android:fontFamily="@font/chewy"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="20sp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/filter"
+                app:layout_constraintStart_toEndOf="@+id/arrow_back"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/filter"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_filter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/layout_change"
-            app:layout_constraintStart_toEndOf="@id/search_view"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorPrimaryLight" />
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:imeOptions="flagNoExtractUi|actionSearch"
+                android:queryHint="@string/search"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/filter"
+                app:layout_constraintStart_toStartOf="@+id/arrow_back"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/layout_change"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_view_module"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/filter"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorPrimaryLight" />
+            <ImageView
+                android:id="@+id/filter"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:clickable="@{viewModel.viewState.viewType == ViewType.GENRE || viewModel.viewState.viewType == ViewType.NETWORK}"
+                android:focusable="@{viewModel.viewState.viewType == ViewType.GENRE || viewModel.viewState.viewType == ViewType.NETWORK}"
+                android:onClick="@{listener::onClick}"
+                app:goneUnless="@{viewModel.viewState.viewType == ViewType.GENRE || viewModel.viewState.viewType == ViewType.NETWORK}"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_filter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/layout_change"
+                app:layout_constraintStart_toEndOf="@id/search_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorPrimaryLight" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.appcompat.widget.Toolbar>
+            <ImageView
+                android:id="@+id/layout_change"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{listener::onClick}"
+                android:layout_gravity="end"
+                android:contentDescription="@string/todo"
+                android:src="@{viewModel.viewState.layoutSpanCount == 1 ? @drawable/ic_view_module : @drawable/ic_view_list}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/filter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorPrimaryLight" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+</layout>

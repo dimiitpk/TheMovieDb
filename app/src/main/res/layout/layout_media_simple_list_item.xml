@@ -1,53 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/movie_item_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/simple_view_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        app:layout_constraintDimensionRatio="H,1:1.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/todo" />
+    <data>
 
+        <import type="com.dimi.moviedatabase.business.domain.state.MediaType" />
 
-    <TextView
-        android:id="@+id/simple_view_title"
-        android:layout_width="0dp"
+        <variable
+            name="media"
+            type="com.dimi.moviedatabase.business.domain.model.Media" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/movie_item_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:fontFamily="@font/chewy"
-        android:gravity="center"
-        android:lines="1"
-        android:maxLines="1"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simple_view_image" />
+        android:background="@android:color/transparent">
 
-    <TextView
-        android:id="@+id/simple_view_vote_average"
-        android:fontFamily="@font/chewy"
-        android:padding="6dp"
-        android:textColor="@color/colorPrimaryText"
-        android:background="@drawable/text_background"
-        app:layout_constraintTop_toTopOf="@id/simple_view_image"
-        app:layout_constraintEnd_toEndOf="@id/simple_view_image"
-        android:layout_margin="6dp"
-        android:textSize="12sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/simple_view_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:loadSmallImage="@{media.posterPath}"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/todo"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="H,1:1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/simple_view_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/chewy"
+            android:gravity="center"
+            android:text="@{media.title}"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/simple_view_image" />
+
+        <TextView
+            android:id="@+id/simple_view_vote_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            app:goneUnless="@{media.mediaType != MediaType.PERSON}"
+            android:background="@drawable/text_background"
+            android:text="@{String.valueOf(media.voteAverage)}"
+            android:fontFamily="@font/chewy"
+            android:padding="6dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/simple_view_image"
+            app:layout_constraintTop_toTopOf="@id/simple_view_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

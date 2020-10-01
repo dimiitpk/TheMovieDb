@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.layout_video_list_item.view.*
 
 
 class VideoListAdapter(
-    private val videoIds: ArrayList<Video>,
+    private val videoIds: List<Video>,
     private val lifecycle: Lifecycle
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -35,7 +35,6 @@ class VideoListAdapter(
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder) {
             is VideoViewHolder -> {
-                println("VideoListAdapter onBindViewHolder ${videoIds[position]}")
                 viewHolder.cueVideo(videoIds[position])
             }
         }

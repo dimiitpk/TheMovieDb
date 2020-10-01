@@ -6,6 +6,7 @@ import com.dimi.moviedatabase.business.domain.model.TvShow
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.business.domain.state.ViewState
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
+import com.dimi.moviedatabase.presentation.main.search.state.SearchViewState
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -77,6 +78,6 @@ data class HomeViewState(
     }
 
     companion object {
-        const val BUNDLE_KEY = "com.dimi.moviedatabase.presentation.main.home.state.HomeViewState"
+        fun getBundleKey() = HomeViewState::class.java.`package`?.name + "." + HomeViewState::class.simpleName
     }
 }

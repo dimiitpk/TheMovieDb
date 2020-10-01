@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Episode
+import com.dimi.moviedatabase.databinding.LayoutRecyclerViewBinding
 import com.dimi.moviedatabase.presentation.common.invisible
 import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.presentation.main.view.adapter.EpisodeAdapter
@@ -14,14 +15,13 @@ import com.dimi.moviedatabase.presentation.main.view.state.SeasonContainerState
 import com.dimi.moviedatabase.presentation.main.view.viewmodel.setSeasonContainerState
 import com.dimi.moviedatabase.presentation.main.view.viewmodel.setSelectedEpisode
 import com.dimi.moviedatabase.util.SpacesItemDecoration
-import kotlinx.android.synthetic.main.layout_recycler_view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class EpisodesFragment :
-    BaseViewMediaFragment(R.layout.layout_recycler_view),
+    BaseViewMediaFragment<LayoutRecyclerViewBinding>(R.layout.layout_recycler_view),
     EpisodeAdapter.Interaction {
 
     private lateinit var recyclerAdapter: EpisodeAdapter
@@ -30,7 +30,7 @@ class EpisodesFragment :
         super.onViewCreated(view, savedInstanceState)
 
         context?.let { ContextCompat.getColor(it, R.color.colorBackground) }?.let {
-            layout_rv_container.setBackgroundColor(
+            binding.layoutRvContainer.setBackgroundColor(
                 it
             )
         }
@@ -53,18 +53,18 @@ class EpisodesFragment :
                             )
                         }
                     }
-                    empty_list_text.invisible()
-                    info_text.text = resources.getString(R.string.episodes_amount_format, viewState.selectedSeason?.episodeCount)
-                    recycler_view_info_container.visible()
+                    binding.emptyListText.invisible()
+                    binding.infoText.text = resources.getString(R.string.episodes_amount_format, viewState.selectedSeason?.episodeCount)
+                    binding.recyclerViewInfoContainer.visible()
                 } ?: run {
-                    empty_list_text.visible()
+                    binding.emptyListText.visible()
                 }
             }
         })
     }
 
     private fun setupRecyclerView() {
-        recycler_view.apply {
+        binding.recyclerView.apply {
 
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
@@ -84,5 +84,10 @@ class EpisodesFragment :
 
         viewModel.setSelectedEpisode(episode = item)
         viewModel.setSeasonContainerState(SeasonContainerState.EPISODES_DETAIL_VIEW)
+    }
+
+    override fun onDestroyView() {
+        binding.recyclerView.adapter = null
+        super.onDestroyView()
     }
 }

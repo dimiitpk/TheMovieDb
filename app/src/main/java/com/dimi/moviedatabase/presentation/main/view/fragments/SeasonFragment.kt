@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Season
 import com.dimi.moviedatabase.business.domain.model.TvShow
+import com.dimi.moviedatabase.databinding.LayoutRecyclerViewBinding
 import com.dimi.moviedatabase.presentation.common.invisible
 import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.presentation.main.view.adapter.SeasonAdapter
@@ -14,14 +15,13 @@ import com.dimi.moviedatabase.presentation.main.view.state.ViewMediaStateEvent
 import com.dimi.moviedatabase.presentation.main.view.viewmodel.getMedia
 import com.dimi.moviedatabase.presentation.main.view.viewmodel.setSelectedSeason
 import com.dimi.moviedatabase.util.SpacesItemDecoration
-import kotlinx.android.synthetic.main.layout_recycler_view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class SeasonFragment :
-    BaseViewMediaFragment(R.layout.layout_recycler_view),
+    BaseViewMediaFragment<LayoutRecyclerViewBinding>(R.layout.layout_recycler_view),
     SeasonAdapter.Interaction{
 
     private lateinit var recyclerAdapter: SeasonAdapter
@@ -51,9 +51,9 @@ class SeasonFragment :
                                     )
                                 }
                             }
-                            empty_list_text.invisible()
+                            binding.emptyListText.invisible()
                         } ?: run {
-                            empty_list_text.visible()
+                            binding.emptyListText.visible()
                         }
                 }
             }
@@ -61,7 +61,7 @@ class SeasonFragment :
     }
 
     private fun setupRecyclerView() {
-        recycler_view.apply {
+        binding.recyclerView.apply {
 
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
@@ -75,6 +75,11 @@ class SeasonFragment :
                 )
             adapter = recyclerAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        binding.recyclerView.adapter = null
+        super.onDestroyView()
     }
 
     override fun onItemSelected(position: Int, item: Season) {

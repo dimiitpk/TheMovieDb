@@ -7,6 +7,7 @@
     <color name="colorBackground">#1b262c</color>
     <color name="colorPrimaryText">#FFFFFF</color>
     <color name="colorSecondaryText">#2A3A43</color>
+    <color name="holoRedLight">@android:color/holo_red_light</color>
 <!--    <color name="colorPrimary">#0098FF</color>-->
 <!--    <color name="colorPrimaryDark">#212B33</color>-->
 <!--    <color name="colorAccent">#A55D10</color>-->

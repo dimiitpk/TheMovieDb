@@ -1,61 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="com.dimi.moviedatabase.util.ConvertExtensionsKt"/>
+        <variable
+            name="episode"
+            type="com.dimi.moviedatabase.business.domain.model.Episode" />
+    </data>
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/todo"
-        app:layout_constraintDimensionRatio="H,16:9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/season_and_episode_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/image"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chewy"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:text="@{episode.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/air_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/season_and_episode_number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/season_and_episode_number" />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:loadBigImage="@{episode.stillPath}"
+            android:contentDescription="@string/todo"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
-    <TextView
-        android:id="@+id/overview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/air_date"
-        app:layout_constraintStart_toStartOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@id/season_and_episode_number" />
+        <TextView
+            android:id="@+id/season_and_episode_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chewy"
+            android:text="@{@string/season_and_episode_number_format(episode.seasonNumber, episode.episodeNumber)}"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/image"
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/air_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chewy"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="12sp"
+            android:text="@{ConvertExtensionsKt.toSimpleString(episode.airDate)}"
+            app:layout_constraintBottom_toBottomOf="@+id/season_and_episode_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/season_and_episode_number" />
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/chewy"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            android:text="@{episode.overview}"
+            app:layout_constraintEnd_toEndOf="@id/air_date"
+            app:layout_constraintStart_toStartOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@id/season_and_episode_number" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

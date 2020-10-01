@@ -8,8 +8,8 @@ import com.dimi.moviedatabase.business.interactors.movie.MovieUseCases
 import com.dimi.moviedatabase.business.interactors.people.PeopleUseCases
 import com.dimi.moviedatabase.business.interactors.tv_show.TvShowUseCases
 import com.dimi.moviedatabase.presentation.common.BaseViewModel
-import com.dimi.moviedatabase.presentation.common.YoutubePlayerState
-import com.dimi.moviedatabase.presentation.common.YoutubePlayerState.*
+import com.dimi.moviedatabase.presentation.common.VisibilityState
+import com.dimi.moviedatabase.presentation.common.VisibilityState.*
 import com.dimi.moviedatabase.presentation.main.view.state.ViewMediaViewState
 import com.dimi.moviedatabase.presentation.main.view.state.ViewMediaStateEvent.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,8 +27,12 @@ constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel<ViewMediaViewState>(savedStateHandle) {
 
-    private val _trailerPlayerState: MutableLiveData<YoutubePlayerState> = MutableLiveData(Hidden)
-    private val _videosPlayerState: MutableLiveData<YoutubePlayerState> = MutableLiveData(Hidden)
+    private val _trailerPlayerState: MutableLiveData<VisibilityState> = MutableLiveData(Hidden)
+    private val _videosPlayerState: MutableLiveData<VisibilityState> = MutableLiveData(Hidden)
+
+    init {
+        println("ViewMediaViewModel -> ${ViewMediaViewState.getBundleKey()}")
+    }
 
     override fun handleNewData(data: ViewMediaViewState) {
         data.let { viewState ->
@@ -59,8 +63,6 @@ constructor(
     override fun setStateEvent(stateEvent: StateEvent) {
 
         val job: Flow<DataState<ViewMediaViewState>?> = when (stateEvent) {
-
-
             is GetMovieTrailers -> {
 
                 movieUseCases.movieTrailersUseCase.getResults(
@@ -217,7 +219,6 @@ constructor(
     }
 
     fun loadDetails(mediaType: MediaType, mediaId: Long) {
-
         setStateEvent(GetDetails(mediaId, mediaType))
     }
 
@@ -232,10 +233,10 @@ constructor(
 
     override fun initNewViewState() = ViewMediaViewState()
 
-    val videosPlayerState: LiveData<YoutubePlayerState>
+    val videosPlayerState: LiveData<VisibilityState>
         get() = _videosPlayerState
 
-    fun setVideosPlayerState(state: YoutubePlayerState) {
+    fun setVideosPlayerState(state: VisibilityState) {
         if (state.toString() != _videosPlayerState.value.toString()) {
             _videosPlayerState.value = state
         }
@@ -245,10 +246,11 @@ constructor(
         return (videosPlayerState.value.toString() == Displayed.toString())
     }
 
-    val trailerPlayerState: LiveData<YoutubePlayerState>
+
+    val trailerPlayerState: LiveData<VisibilityState>
         get() = _trailerPlayerState
 
-    fun setTrailerPlayerState(state: YoutubePlayerState) {
+    fun setTrailerPlayerState(state: VisibilityState) {
         if (state.toString() != _trailerPlayerState.value.toString()) {
             _trailerPlayerState.value = state
         }
@@ -263,6 +265,6 @@ constructor(
     }
 
     override fun getUniqueViewStateIdentifier(): String {
-        return ViewMediaViewState.BUNDLE_KEY
+        return ViewMediaViewState.getBundleKey()
     }
 }

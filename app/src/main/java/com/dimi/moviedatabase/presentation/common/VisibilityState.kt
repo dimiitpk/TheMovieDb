@@ -1,14 +1,14 @@
 package com.dimi.moviedatabase.presentation.common
 
-sealed class YoutubePlayerState {
+sealed class VisibilityState {
 
-    object Hidden : YoutubePlayerState() {
+    object Hidden : VisibilityState() {
         override fun toString(): String {
             return "Hidden"
         }
     }
 
-    object Displayed : YoutubePlayerState() {
+    object Displayed : VisibilityState() {
         override fun toString(): String {
             return "Displayed"
         }

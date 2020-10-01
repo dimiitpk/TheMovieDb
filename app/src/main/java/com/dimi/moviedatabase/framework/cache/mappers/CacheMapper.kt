@@ -113,7 +113,6 @@ constructor(
 
         moviesByList?.let {
             return if (moviesByList.movies.isNotEmpty())
-
                 moviesByList.movies
                     .map {
                         val movie = movieCacheMapper.mapFromEntity(it)

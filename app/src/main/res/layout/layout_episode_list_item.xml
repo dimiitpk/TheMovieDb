@@ -1,71 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/episode_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBackground">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_gravity="start"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/todo"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="W,16:9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="com.dimi.moviedatabase.util.ConvertExtensionsKt"/>
+        <variable
+            name="episode"
+            type="com.dimi.moviedatabase.business.domain.model.Episode" />
+    </data>
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/episode_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@id/image"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/more_info_button"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toTopOf="@+id/image">
+        android:background="@color/colorBackground">
 
-        <TextView
-            android:id="@+id/episode_name"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            app:loadBigImage="@{episode.stillPath}"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/todo"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="W,16:9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="1dp"
-            android:lines="1"
-            android:ellipsize="end"
-            android:fontFamily="@font/chewy"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="14sp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@id/image"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/more_info_button"
             app:layout_constraintStart_toEndOf="@+id/image"
-            app:layout_constraintTop_toTopOf="@+id/image" />
+            app:layout_constraintTop_toTopOf="@+id/image">
 
-        <TextView
-            android:id="@+id/episode_number_and_date"
+            <TextView
+                android:id="@+id/episode_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="@{episode.name}"
+                android:fontFamily="@font/chewy"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/image"
+                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintTop_toTopOf="@+id/image" />
+
+            <TextView
+                android:id="@+id/episode_number_and_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:fontFamily="@font/chewy"
+                android:text="@{@string/episode_info_format(episode.episodeNumber, ConvertExtensionsKt.toSimpleString(episode.airDate))}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@id/episode_name" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/more_info_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="1dp"
-            android:fontFamily="@font/chewy"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/image"
-            app:layout_constraintTop_toBottomOf="@id/episode_name" />
-    </LinearLayout>
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/todo" />
 
-
-    <ImageView
-        android:id="@+id/more_info_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:src="@drawable/ic_arrow_right"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/todo" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

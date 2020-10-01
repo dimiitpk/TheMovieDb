@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.dimi.moviedatabase.R
-import com.dimi.moviedatabase.business.domain.model.Season
 import com.dimi.moviedatabase.business.domain.model.TvShow
-import com.dimi.moviedatabase.framework.network.NetworkConstants.BIG_IMAGE_URL_PREFIX
+import com.dimi.moviedatabase.databinding.FragmentSeasonsAndEpisodesBinding
 import com.dimi.moviedatabase.presentation.common.gone
 import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.presentation.main.view.state.SeasonContainerState
@@ -14,33 +13,30 @@ import com.dimi.moviedatabase.presentation.main.view.viewmodel.getSeasonContaine
 import com.dimi.moviedatabase.presentation.main.view.viewmodel.setSeasonContainerState
 import com.dimi.moviedatabase.presentation.main.view.viewmodel.setSelectedEpisode
 import com.dimi.moviedatabase.presentation.main.view.viewmodel.setSelectedSeason
-import com.dimi.moviedatabase.util.toSimpleString
-import kotlinx.android.synthetic.main.fragment_seasons_and_episodes.*
-import kotlinx.android.synthetic.main.layout_season_detail_fragment.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class SeasonsAndEpisodesFragment :
-    BaseViewMediaFragment(R.layout.fragment_seasons_and_episodes) {
+    BaseViewMediaFragment<FragmentSeasonsAndEpisodesBinding>(R.layout.fragment_seasons_and_episodes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeObservers()
-        arrow_back.setOnClickListener {
-            if (arrow_back.isVisible)
+        binding.arrowBack.setOnClickListener {
+            if (binding.arrowBack.isVisible)
                 when (viewModel.getSeasonContainerState()) {
                     SeasonContainerState.EPISODES_VIEW -> {
                         viewModel.setSelectedSeason(null)
                         viewModel.setSeasonContainerState(SeasonContainerState.SEASONS_VIEW)
-                        arrow_back.gone()
+                        binding.arrowBack.gone()
                     }
                     SeasonContainerState.EPISODES_DETAIL_VIEW -> {
                         viewModel.setSelectedEpisode(null)
                         viewModel.setSeasonContainerState(SeasonContainerState.EPISODES_VIEW)
-                        arrow_back.visible()
+                        binding.arrowBack.visible()
                     }
                     else -> {
 
@@ -54,22 +50,19 @@ class SeasonsAndEpisodesFragment :
             if (viewState != null) {
                 when (viewState.seasonContainerState) {
                     SeasonContainerState.SEASONS_VIEW -> {
-                        info_included_fragment.gone()
                         parentFragmentManager.beginTransaction()
                             .replace(R.id.container_fragment, SeasonFragment()).commit()
-                        arrow_back.gone()
+                        binding.arrowBack.gone()
                     }
                     SeasonContainerState.EPISODES_VIEW -> {
-                        info_included_fragment.visible()
                         parentFragmentManager.beginTransaction()
                             .replace(R.id.container_fragment, EpisodesFragment()).commit()
-                        arrow_back.visible()
+                        binding.arrowBack.visible()
                     }
                     SeasonContainerState.EPISODES_DETAIL_VIEW -> {
-                        info_included_fragment.gone()
                         parentFragmentManager.beginTransaction()
                             .replace(R.id.container_fragment, EpisodeDetailsFragment()).commit()
-                        arrow_back.visible()
+                        binding.arrowBack.visible()
                     }
                 }
 
@@ -78,34 +71,18 @@ class SeasonsAndEpisodesFragment :
                         when (viewState.seasonContainerState) {
                             SeasonContainerState.EPISODES_VIEW -> {
                                 viewState.selectedSeason?.let { season ->
-                                    setSeasonDetails(season)
+                                    binding.fragmentSeasonsContainer.smoothScrollTo(0, 0)
+                                    binding.season = season
+                                    binding.focusableView.requestFocus()
                                 }
                             }
-                            SeasonContainerState.EPISODES_DETAIL_VIEW -> {
-                                info_included_fragment.gone()
-                            }
                             else -> {
-                                info_included_fragment.gone()
+                                binding.season = null
                             }
                         }
                     }
                 }
             }
         })
-    }
-
-    private fun setSeasonDetails(season: Season) {
-
-        fragment_seasons_container.smoothScrollTo(0, 0)
-        info_included_fragment.overview.text = season.overview
-        info_included_fragment.air_date.text = season.airDate.toSimpleString()
-        info_included_fragment.name.text = season.seasonName
-
-        requestManager
-            .load(BIG_IMAGE_URL_PREFIX + season.posterPath)
-            .into(info_included_fragment.image)
-
-        info_included_fragment.visible()
-        focusable_view.requestFocus()
     }
 }

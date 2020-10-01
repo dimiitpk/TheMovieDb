@@ -4,10 +4,12 @@ import android.app.DownloadManager
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Image
 import com.dimi.moviedatabase.business.domain.state.*
 import com.dimi.moviedatabase.business.interactors.movie.MovieUseCases
@@ -38,7 +40,8 @@ constructor(
 ) : BaseViewModel<FullScreenImagesViewState>(savedStateHandle) {
 
     private var lastDownloadingStatusMessage = ""
-    private val picturesDirectory = File(Environment.DIRECTORY_PICTURES)
+    private val picturesDirectory =
+        File(Environment.DIRECTORY_PICTURES)
 
 
     override fun handleNewData(data: FullScreenImagesViewState) {
@@ -90,7 +93,7 @@ constructor(
     }
 
     fun loadImages(mediaType: MediaType, mediaId: Long) {
-        if(getPostersSize() <= 0)
+        if (getPostersSize() <= 0)
             setStateEvent(GetImages(mediaId, mediaType))
     }
 
@@ -125,7 +128,11 @@ constructor(
         val downloadManager =
             context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
-        val request = getDownloadManagerRequest(SHARE_INTENT_IMAGE_FILE_NAME, Uri.parse(url), picturesDirectory)
+        val request = getDownloadManagerRequest(
+            SHARE_INTENT_IMAGE_FILE_NAME,
+            Uri.parse(url),
+            picturesDirectory
+        )
 
         setSendingImageDownloadId(downloadManager.enqueue(request))
         getSendingImageDownloadId()?.let {
@@ -166,7 +173,11 @@ constructor(
         )
     }
 
-    private fun executeDownload( url: String, downloadManager: DownloadManager, query: DownloadManager.Query) {
+    private fun executeDownload(
+        url: String,
+        downloadManager: DownloadManager,
+        query: DownloadManager.Query
+    ) {
 
         viewModelScope.launch(Default) {
             var downloading = true
@@ -229,13 +240,14 @@ constructor(
 
         return DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-                .setAllowedOverRoaming(false)
-                .setTitle(title)
-                .setDescription("")
-                .setDestinationInExternalPublicDir(
-                    directory.toString(),
-                    title
-                )
+            setAllowedOverRoaming(false)
+            if (title != SHARE_INTENT_IMAGE_FILE_NAME) setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            setTitle(title)
+            setDescription("")
+            setDestinationInExternalPublicDir(
+                directory.toString(),
+                context.getString(R.string.app_name) + "/" + title
+            )
         }
     }
 

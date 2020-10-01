@@ -11,21 +11,20 @@ import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.business.domain.model.Person
 import com.dimi.moviedatabase.business.domain.state.MediaType
+import com.dimi.moviedatabase.databinding.LayoutRecyclerViewBinding
 import com.dimi.moviedatabase.presentation.GlideApp
 import com.dimi.moviedatabase.presentation.common.adapters.MediaListAdapter
 import com.dimi.moviedatabase.presentation.common.invisible
 import com.dimi.moviedatabase.presentation.common.visible
-import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragmentArgs
 import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragmentDirections
 import com.dimi.moviedatabase.util.SpacesItemDecoration
-import kotlinx.android.synthetic.main.layout_recycler_view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class CastFragment :
-    BaseViewMediaFragment(R.layout.layout_recycler_view, true),
+    BaseViewMediaFragment<LayoutRecyclerViewBinding>(R.layout.layout_recycler_view, true),
     MediaListAdapter.Interaction {
 
     private lateinit var recyclerAdapter: MediaListAdapter<Person>
@@ -53,7 +52,6 @@ class CastFragment :
                 viewState.media?.let { media ->
                     media.castList?.let { list ->
                         if (list.isNotEmpty()) {
-
                             recyclerAdapter.apply {
                                 preloadGlideImages(
                                     list = list
@@ -63,11 +61,11 @@ class CastFragment :
                                 )
                             }
                         }
-                        empty_list_text.invisible()
-                        info_text.text = resources.getString(R.string.persons_amount_format, list.size)
-                        recycler_view_info_container.visible()
+                        binding.emptyListText.invisible()
+                        binding.infoText.text = resources.getString(R.string.persons_amount_format, list.size)
+                        binding.recyclerViewInfoContainer.visible()
                     } ?: run {
-                        empty_list_text.visible()
+                        binding.emptyListText.visible()
                     }
                 }
             }
@@ -75,7 +73,7 @@ class CastFragment :
     }
 
     private fun setupRecyclerView() {
-        recycler_view.apply {
+        binding.recyclerView.apply {
 
             layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
 
@@ -90,6 +88,11 @@ class CastFragment :
                 )
             adapter = recyclerAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        binding.recyclerView.adapter = null
+        super.onDestroyView()
     }
 
     override fun onItemSelected(position: Int, item: Media) {

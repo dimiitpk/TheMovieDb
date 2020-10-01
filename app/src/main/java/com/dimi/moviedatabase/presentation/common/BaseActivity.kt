@@ -16,7 +16,7 @@ abstract class BaseActivity : AppCompatActivity(), UIController {
 
     private var dialogInView: MaterialDialog? = null
 
-    open override fun displayProgressBar(isDisplayed: Boolean) { }
+    override fun displayProgressBar(isDisplayed: Boolean) { }
 
     override fun hideSoftKeyboard() {
         if (currentFocus != null) {

@@ -18,7 +18,6 @@ fun SearchViewModel.resetPage() {
 @ExperimentalCoroutinesApi
 fun SearchViewModel.refreshFromCache(clearLayoutManagerState: Boolean = false) {
 
-    println("loadFirstPage !refreshFromCache")
     if (!isJobAlreadyActive(SearchMedia())) {
         setQueryExhausted(false)
         setStateEvent(SearchMedia(getMediaType(), clearLayoutManagerState))
@@ -27,10 +26,11 @@ fun SearchViewModel.refreshFromCache(clearLayoutManagerState: Boolean = false) {
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-fun SearchViewModel.loadFirstPage() {
-    println("loadFirstPage !1")
+fun SearchViewModel.loadFirstPage(newQuery: String? = null) {
+    newQuery?.let {
+        setQuery(it)
+    }
     if (!isJobAlreadyActive(SearchMedia())) {
-        println("loadFirstPage !2")
         setQueryExhausted(false)
         resetPage()
         setStateEvent(SearchMedia(getMediaType()))

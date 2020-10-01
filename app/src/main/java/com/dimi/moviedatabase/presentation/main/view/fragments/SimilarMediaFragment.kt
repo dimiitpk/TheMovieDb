@@ -8,21 +8,20 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.business.domain.state.MediaType
+import com.dimi.moviedatabase.databinding.LayoutRecyclerViewBinding
 import com.dimi.moviedatabase.presentation.common.gone
 import com.dimi.moviedatabase.presentation.common.invisible
 import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.presentation.common.adapters.MediaListAdapter
-import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragmentArgs
 import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragmentDirections
 import com.dimi.moviedatabase.util.SpacesItemDecoration
-import kotlinx.android.synthetic.main.layout_recycler_view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class SimilarMediaFragment :
-    BaseViewMediaFragment(R.layout.layout_recycler_view),
+    BaseViewMediaFragment<LayoutRecyclerViewBinding>(R.layout.layout_recycler_view),
     MediaListAdapter.Interaction {
 
     private lateinit var recyclerAdapter: MediaListAdapter<Media>
@@ -47,23 +46,23 @@ class SimilarMediaFragment :
                             viewState.similarMedia, false
                         )
                     }
-                    empty_list_text.invisible()
+                    binding.emptyListText.invisible()
                     if (viewState.mediaType == MediaType.PERSON)
-                        info_text.text = resources.getString(R.string.tv_shows_amount_format, list.size)
+                        binding.infoText.text = resources.getString(R.string.tv_shows_amount_format, list.size)
                     else
-                        info_text.invisible()
-                    view_layout_change.visible()
-                    recycler_view_info_container.visible()
+                        binding.infoText.invisible()
+                    binding.viewLayoutChange.visible()
+                    binding.recyclerViewInfoContainer.visible()
                 } ?: run {
-                    empty_list_text.visible()
-                    recycler_view_info_container.gone()
+                    binding.emptyListText.visible()
+                    binding.recyclerViewInfoContainer.gone()
                 }
             }
         })
     }
 
     private fun setupRecyclerView() {
-        recycler_view.apply {
+        binding.recyclerView.apply {
 
             layoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
 
@@ -79,17 +78,21 @@ class SimilarMediaFragment :
             adapter = recyclerAdapter
         }
 
-        view_layout_change.setOnClickListener {
+        binding.viewLayoutChange.setOnClickListener {
             recyclerAdapter.changeViewLayout()?.let { layout ->
                 if( layout.spanCount == 1 ) {
-                    view_layout_change.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_view_module, 0)
+                    binding.viewLayoutChange.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_view_module, 0)
                 } else {
-                    view_layout_change.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_view_list, 0)
+                    binding.viewLayoutChange.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_view_list, 0)
                 }
             }
         }
     }
 
+    override fun onDestroyView() {
+        binding.recyclerView.adapter = null
+        super.onDestroyView()
+    }
 
     override fun onResume() {
         super.onResume()

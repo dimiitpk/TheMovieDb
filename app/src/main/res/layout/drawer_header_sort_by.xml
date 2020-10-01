@@ -1,87 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
+        <import type="com.dimi.moviedatabase.presentation.common.enums.SortOrder" />
+        <variable
+            name="viewModel"
+            type="com.dimi.moviedatabase.presentation.main.search.viewmodel.SearchViewModel" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/chewy"
-            android:text="@string/sort_by"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="20sp" />
+        <variable
+            name="listener"
+            type="com.dimi.moviedatabase.presentation.common.OnDataBindingClickListener" />
+    </data>
 
-        <TextView
-            android:id="@+id/drawer_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/chewy"
-            android:gravity="end"
-            android:text="@string/done"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/container2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container">
-
-        <TextView
-            android:id="@+id/asc_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/chewy"
-            android:gravity="center|start"
-            android:text="@string/ascending_a_z"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="14sp"
-            app:drawableStartCompat="@drawable/ic_arrow_downward"
-            app:drawableTint="@color/colorSecondaryText" />
-
-        <TextView
-            android:id="@+id/desc_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/chewy"
-            android:gravity="center|end"
-            android:text="@string/descending_z_a"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="14sp"
-            app:drawableEndCompat="@drawable/ic_arrow_upward"
-            app:drawableTint="@color/colorSecondaryText" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/drawer_menu_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container2"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/chewy"
+                android:text="@string/sort_by"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/drawer_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/chewy"
+                android:gravity="end"
+                android:onClick="@{listener::onClick}"
+                android:text="@string/done"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container">
+
+            <TextView
+                android:id="@+id/asc_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/chewy"
+                android:gravity="center|start"
+                android:onClick="@{listener::onClick}"
+                android:text="@string/ascending_a_z"
+                android:textAndDrawableColor="@{viewModel.viewState.sortOrder == SortOrder.ASCENDING ? @color/holoRedLight : @color/colorSecondaryText}"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_arrow_downward"/>
+<!--                app:drawableTint="@{true ? context.getColor(@color/holoRedLight) : context.getColor(@color/colorSecondaryText)}" />-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/desc_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/chewy"
+                android:gravity="center|end"
+                android:onClick="@{listener::onClick}"
+                android:text="@string/descending_z_a"
+                android:textAndDrawableColor="@{viewModel.viewState.sortOrder == SortOrder.DESCENDING ? @color/holoRedLight : @color/colorSecondaryText}"
+                android:textSize="14sp"
+                app:drawableEndCompat="@drawable/ic_arrow_upward"/>
+<!--                app:drawableTint="@{true ? context.getColor(@color/holoRedLight) : context.getColor(@color/colorSecondaryText)}"-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_menu_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -3,18 +3,12 @@ package com.dimi.moviedatabase.presentation.main.view.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Episode
-import com.dimi.moviedatabase.framework.network.NetworkConstants.BIG_IMAGE_URL_PREFIX
-import com.dimi.moviedatabase.framework.network.NetworkConstants.SMALL_IMAGE_URL_PREFIX
-import com.dimi.moviedatabase.util.toSimpleString
-import kotlinx.android.synthetic.main.layout_episode_list_item.view.*
+import com.dimi.moviedatabase.databinding.LayoutEpisodeListItemBinding
 
 class EpisodeAdapter(
     private val requestManager: RequestManager,
@@ -39,12 +33,7 @@ class EpisodeAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return EpisodeViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.layout_episode_list_item,
-                parent,
-                false
-            ),
-            requestManager,
+            LayoutEpisodeListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             interaction
         )
     }
@@ -64,12 +53,12 @@ class EpisodeAdapter(
     fun preloadGlideImages(
         list: List<Episode>
     ) {
-        for (episode in list) {
-            if (episode.stillPath != null)
-                requestManager
-                    .load(SMALL_IMAGE_URL_PREFIX + episode.stillPath)
-                    .preload()
-        }
+//        for (episode in list) {
+//            if (episode.stillPath != null)
+//                requestManager
+//                    .load(SMALL_IMAGE_URL_PREFIX + episode.stillPath)
+//                    .preload()
+//        }
     }
 
     fun submitList(list: List<Episode>?) {
@@ -78,24 +67,15 @@ class EpisodeAdapter(
 
     class EpisodeViewHolder
     constructor(
-        itemView: View,
-        private val requestManager: RequestManager,
+        private val binding: LayoutEpisodeListItemBinding,
         private val interaction: Interaction?
-    ) : RecyclerView.ViewHolder(itemView) {
+    ) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: Episode) = with(itemView) {
-
-            itemView.more_info_button.setOnClickListener {
+        fun bind(item: Episode) {
+            binding.episode = item
+            binding.moreInfoButton.setOnClickListener {
                 interaction?.onItemSelected(absoluteAdapterPosition, item)
             }
-
-            requestManager
-                .load(BIG_IMAGE_URL_PREFIX + item.stillPath)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(itemView.image)
-
-            itemView.episode_name.text = item.name
-            itemView.episode_number_and_date.text = resources.getString(R.string.episode_info_format, item.episodeNumber, item.airDate.toSimpleString())
         }
     }
 
