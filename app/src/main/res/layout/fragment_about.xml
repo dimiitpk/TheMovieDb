@@ -301,7 +301,7 @@
                 android:fontFamily="@font/chewy"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="14sp"
-                android:text="@{@string/posters_amount_format(viewModel.viewState.posters.size())}"
+                android:text="@{@plurals/posters_amount_format(viewModel.viewState.posters.size(), viewModel.viewState.posters.size())}"
                 app:goneUnless="@{viewModel.viewState.posters.size() > 0}"
                 app:layout_constraintBottom_toBottomOf="@+id/posters"
                 app:layout_constraintStart_toStartOf="@+id/posters" />
@@ -333,7 +333,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:text="@{@string/backdrop_amount_format(viewModel.viewState.backdrops.size())}"
+                android:text="@{@plurals/backdrop_amount_format(viewModel.viewState.backdrops.size(), viewModel.viewState.backdrops.size())}"
                 android:fontFamily="@font/chewy"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="14sp"

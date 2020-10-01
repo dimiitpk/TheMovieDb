@@ -3,20 +3,13 @@ package com.dimi.moviedatabase.presentation.main.view.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Season
 import com.dimi.moviedatabase.databinding.LayoutSeasonListItemBinding
 import com.dimi.moviedatabase.framework.network.NetworkConstants.SMALL_IMAGE_URL_PREFIX
-import com.dimi.moviedatabase.presentation.GlideApp
-import kotlinx.android.synthetic.main.layout_episode_list_item.view.*
-import kotlinx.android.synthetic.main.layout_season_list_item.view.*
-import kotlinx.android.synthetic.main.layout_season_list_item.view.image
 
 class SeasonAdapter(
     private val requestManager: RequestManager,

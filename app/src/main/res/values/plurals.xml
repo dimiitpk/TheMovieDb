@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="tv_shows_amount_format">
+        <item quantity="one">%d tv show</item>
+        <item quantity="other">%d tv shows</item>
+    </plurals>
+    <plurals name="movies_amount_format">
+        <item quantity="one">%d movie</item>
+        <item quantity="other">%d movies</item>
+    </plurals>
+    <plurals name="people_amount_format">
+        <item quantity="one">%d person</item>
+        <item quantity="other">%d people</item>
+    </plurals>
+    <plurals name="episodes_amount_format">
+        <item quantity="one">%d episode</item>
+        <item quantity="other">%d episodes</item>
+    </plurals>
+    <plurals name="episodes_brackets_format">
+        <item quantity="one">(%d episode)</item>
+        <item quantity="other">(%d episodes)</item>
+    </plurals>
+    <plurals name="posters_amount_format">
+        <item quantity="one">%d poster</item>
+        <item quantity="other">%d posters</item>
+    </plurals>
+    <plurals name="backdrop_amount_format">
+        <item quantity="one">%d backdrop</item>
+        <item quantity="other">%d backdrops</item>
+    </plurals>
+</resources>

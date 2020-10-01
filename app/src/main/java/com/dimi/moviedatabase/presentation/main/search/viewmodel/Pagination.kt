@@ -1,7 +1,6 @@
 package com.dimi.moviedatabase.presentation.main.search.viewmodel
 
 import com.dimi.moviedatabase.presentation.main.search.state.SearchStateEvent.*
-import com.dimi.moviedatabase.presentation.main.search.state.SearchViewState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
@@ -55,16 +54,6 @@ fun SearchViewModel.nextPage() {
         incrementPageNumber()
         setStateEvent(SearchMedia(getMediaType()))
         println("Attempting load next page")
-    }
-}
-
-@FlowPreview
-@ExperimentalCoroutinesApi
-fun SearchViewModel.handleIncomingData(viewState: SearchViewState) {
-    viewState.let { movieFields ->
-        movieFields.mediaList?.let {
-            setDataList(it)
-        }
     }
 }
 

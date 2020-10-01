@@ -25,9 +25,6 @@ import com.dimi.moviedatabase.framework.cache.implementation.MovieDaoServiceImpl
 import com.dimi.moviedatabase.framework.cache.implementation.PeopleDaoServiceImpl
 import com.dimi.moviedatabase.framework.cache.implementation.TvShowDaoServiceImpl
 import com.dimi.moviedatabase.framework.cache.mappers.CacheMapper
-import com.dimi.moviedatabase.framework.cache.mappers.MovieCacheMapper
-import com.dimi.moviedatabase.framework.cache.mappers.PeopleCacheMapper
-import com.dimi.moviedatabase.framework.cache.mappers.TvShowCacheMapper
 import com.dimi.moviedatabase.framework.network.api.MovieApi
 import com.dimi.moviedatabase.framework.network.api.PeopleApi
 import com.dimi.moviedatabase.framework.network.api.TvShowApi
@@ -40,7 +37,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Singleton

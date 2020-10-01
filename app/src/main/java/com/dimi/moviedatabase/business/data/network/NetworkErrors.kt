@@ -5,7 +5,7 @@ import kotlinx.coroutines.FlowPreview
 
 object NetworkErrors {
 
-    const val UNABLE_TO_RESOLVE_HOST = "Unable to resolve host"
+    private const val UNABLE_TO_RESOLVE_HOST = "Unable to resolve host"
     const val UNABLE_TODO_OPERATION_WO_INTERNET = "Can't do that operation without an internet connection"
     const val ERROR_CHECK_NETWORK_CONNECTION = "Check network connection."
     const val NETWORK_ERROR_UNKNOWN = "Unknown network error"

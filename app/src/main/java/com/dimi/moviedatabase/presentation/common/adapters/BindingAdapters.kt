@@ -12,7 +12,6 @@ import com.dimi.moviedatabase.business.domain.model.*
 import com.dimi.moviedatabase.framework.network.NetworkConstants
 import com.dimi.moviedatabase.presentation.GlideApp
 import com.dimi.moviedatabase.presentation.common.*
-import com.google.android.material.button.MaterialButton
 
 
 object BindingAdapters {

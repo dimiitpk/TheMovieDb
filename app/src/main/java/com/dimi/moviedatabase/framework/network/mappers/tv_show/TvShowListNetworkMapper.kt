@@ -1,9 +1,7 @@
 package com.dimi.moviedatabase.framework.network.mappers.tv_show
 
-import com.dimi.moviedatabase.business.data.network.responses.MovieSearchResponse
 import com.dimi.moviedatabase.business.data.network.responses.TvShowSearchResponse
 import com.dimi.moviedatabase.business.domain.util.EntityMapper
-import com.dimi.moviedatabase.framework.network.responses.movie.MovieListResponse
 import com.dimi.moviedatabase.framework.network.responses.tv_show.TvShowListResponse
 import javax.inject.Inject
 

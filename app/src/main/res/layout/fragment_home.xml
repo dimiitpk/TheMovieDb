@@ -21,12 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:orientation="horizontal" />
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:theme="@style/AppTheme.Toolbar"-->
-<!--            app:layout_scrollFlags="scroll|enterAlways" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -36,7 +36,7 @@ abstract class NetworkBoundResource<NetworkResponse, CacheResponse, ViewState : 
             is ApiResult.GenericError -> {
                 emit(
                     buildError<ViewState>(
-                        apiResult.errorMessage?.let { it } ?: ERROR_UNKNOWN,
+                        apiResult.errorMessage ?: ERROR_UNKNOWN,
                         UIComponentType.Dialog,
                         stateEvent
                     )

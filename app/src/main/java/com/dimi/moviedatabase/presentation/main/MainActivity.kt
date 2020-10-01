@@ -2,18 +2,21 @@ package com.dimi.moviedatabase.presentation.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.dimi.moviedatabase.R
+import com.dimi.moviedatabase.databinding.ActivityMainBinding
 import com.dimi.moviedatabase.presentation.common.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -23,8 +26,8 @@ class MainActivity : BaseActivity() {
 
     override fun displayProgressBar(isDisplayed: Boolean) {
         if(isDisplayed)
-            progress_bar.visible()
+            binding.progressBar.visible()
         else
-            progress_bar.gone()
+            binding.progressBar.gone()
     }
 }

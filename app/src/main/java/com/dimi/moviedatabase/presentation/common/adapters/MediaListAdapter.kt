@@ -3,30 +3,18 @@ package com.dimi.moviedatabase.presentation.common.adapters
 import android.content.Context
 import android.graphics.Point
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dimi.moviedatabase.BR
-import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Media
-import com.dimi.moviedatabase.business.domain.model.Person
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.databinding.LayoutCastListItemBinding
 import com.dimi.moviedatabase.databinding.LayoutMediaDetailListItemBinding
 import com.dimi.moviedatabase.databinding.LayoutMediaSimpleListItemBinding
-import com.dimi.moviedatabase.framework.network.NetworkConstants.SMALL_IMAGE_URL_PREFIX
-import com.dimi.moviedatabase.presentation.common.OnDataBindingClickListener
-import com.dimi.moviedatabase.presentation.common.gone
-import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.util.Constants.LAYOUT_LIST_SPAN_COUNT
-import com.dimi.moviedatabase.util.toSimpleString
-import kotlinx.android.synthetic.main.layout_cast_list_item.view.*
-import kotlinx.android.synthetic.main.layout_media_detail_list_item.view.*
-import kotlinx.android.synthetic.main.layout_media_simple_list_item.view.*
 
 class MediaListAdapter<T : Media>(
     private val requestManager: RequestManager,

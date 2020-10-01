@@ -4,10 +4,6 @@ package com.dimi.moviedatabase.business.domain.state
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dimi.moviedatabase.business.domain.state.MessageType
-import com.dimi.moviedatabase.business.domain.state.Response
-import com.dimi.moviedatabase.business.domain.state.StateMessage
-import com.dimi.moviedatabase.business.domain.state.UIComponentType
 import kotlinx.android.parcel.IgnoredOnParcel
 import java.lang.IndexOutOfBoundsException
 

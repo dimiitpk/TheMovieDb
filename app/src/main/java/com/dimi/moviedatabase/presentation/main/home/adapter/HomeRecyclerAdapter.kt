@@ -9,8 +9,6 @@ import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.presentation.common.adapters.MediaListAdapter
 import com.dimi.moviedatabase.presentation.common.gone
-import com.dimi.moviedatabase.presentation.common.invisible
-import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.util.SpacesItemDecoration
 import kotlinx.android.synthetic.main.layout_home_list_item.view.*
 

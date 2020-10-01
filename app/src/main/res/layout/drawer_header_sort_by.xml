@@ -76,8 +76,6 @@
                 android:textAndDrawableColor="@{viewModel.viewState.sortOrder == SortOrder.ASCENDING ? @color/holoRedLight : @color/colorSecondaryText}"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_arrow_downward"/>
-<!--                app:drawableTint="@{true ? context.getColor(@color/holoRedLight) : context.getColor(@color/colorSecondaryText)}" />-->
-
 
             <TextView
                 android:id="@+id/desc_button"
@@ -93,8 +91,6 @@
                 android:textAndDrawableColor="@{viewModel.viewState.sortOrder == SortOrder.DESCENDING ? @color/holoRedLight : @color/colorSecondaryText}"
                 android:textSize="14sp"
                 app:drawableEndCompat="@drawable/ic_arrow_upward"/>
-<!--                app:drawableTint="@{true ? context.getColor(@color/holoRedLight) : context.getColor(@color/colorSecondaryText)}"-->
-
         </LinearLayout>
 
         <LinearLayout

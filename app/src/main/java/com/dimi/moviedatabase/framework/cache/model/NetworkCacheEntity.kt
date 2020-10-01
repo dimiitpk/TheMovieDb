@@ -1,7 +1,6 @@
 package com.dimi.moviedatabase.framework.cache.model
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
 
 @Entity(
     tableName = "network"

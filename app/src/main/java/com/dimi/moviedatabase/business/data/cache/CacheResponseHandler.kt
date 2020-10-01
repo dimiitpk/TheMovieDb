@@ -1,7 +1,6 @@
 package com.dimi.moviedatabase.business.data.cache
 
 import com.dimi.moviedatabase.business.data.cache.CacheErrors.CACHE_DATA_NULL
-import com.dimi.moviedatabase.business.data.cache.CacheResult
 import com.dimi.moviedatabase.business.domain.state.*
 import com.dimi.moviedatabase.business.domain.state.ViewState as ViewStateInterface
 

@@ -2,7 +2,6 @@ package com.dimi.moviedatabase.framework.cache.model
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import com.dimi.moviedatabase.business.domain.model.Movie
 import java.util.*
 
 @Entity(
@@ -43,7 +42,4 @@ data class SeasonCacheEntity (
     @ColumnInfo(name = "tvShowId", index = true)
     var tvShowId: Long
 
-) {
-
-
-}
+)

@@ -54,7 +54,7 @@ class EpisodesFragment :
                         }
                     }
                     binding.emptyListText.invisible()
-                    binding.infoText.text = resources.getString(R.string.episodes_amount_format, viewState.selectedSeason?.episodeCount)
+                    binding.infoText.text = resources.getQuantityString(R.plurals.episodes_amount_format, viewState.selectedSeason?.episodeCount ?: 2, viewState.selectedSeason?.episodeCount)
                     binding.recyclerViewInfoContainer.visible()
                 } ?: run {
                     binding.emptyListText.visible()

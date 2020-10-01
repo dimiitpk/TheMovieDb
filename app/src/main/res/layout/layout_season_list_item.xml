@@ -61,7 +61,7 @@
             android:fontFamily="@font/chewy"
             android:textColor="@color/colorSecondaryText"
             android:textSize="12sp"
-            android:text="@{@string/episodes_brackets_format(season.episodeCount)}"
+            android:text="@{@plurals/episodes_brackets_format(season.episodeCount, season.episodeCount)}"
             app:layout_constraintEnd_toStartOf="@+id/arrow_select_season"
             app:layout_constraintTop_toBottomOf="@+id/season_name" />
 

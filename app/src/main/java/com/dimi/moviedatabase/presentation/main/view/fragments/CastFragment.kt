@@ -62,7 +62,7 @@ class CastFragment :
                             }
                         }
                         binding.emptyListText.invisible()
-                        binding.infoText.text = resources.getString(R.string.persons_amount_format, list.size)
+                        binding.infoText.text = resources.getQuantityString(R.plurals.people_amount_format, list.size, list.size)
                         binding.recyclerViewInfoContainer.visible()
                     } ?: run {
                         binding.emptyListText.visible()

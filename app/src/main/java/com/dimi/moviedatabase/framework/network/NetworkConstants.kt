@@ -1,6 +1,5 @@
 package com.dimi.moviedatabase.framework.network
 
-import com.dimi.moviedatabase.util.Keys
 
 object NetworkConstants {
 
@@ -56,13 +55,4 @@ object NetworkConstants {
     const val SORT_BY_DEFAULT = "popularity.desc"
     const val VIDEOS_AND_CREDITS_APPEND = "videos,credits"
     const val INCLUDE_IMAGE_DEFAULT = "en,null"//%2C
-
-
-    const val MOVIE_DISCOVER_SORT_BY_POPULARITY = "popularity"
-    const val MOVIE_DISCOVER_SORT_BY_ORIGINAL_TITLE = "original_title"
-    const val MOVIE_DISCOVER_SORT_BY_VOTE_AVERAGE = "vote_average"
-    const val MOVIE_DISCOVER_SORT_BY_VOTE_COUNT = "vote_count"
-
-    const val MOVIE_DISCOVER_SORT_ASC = "asc"
-    const val MOVIE_DISCOVER_SORT_DESC = "desc"
 }

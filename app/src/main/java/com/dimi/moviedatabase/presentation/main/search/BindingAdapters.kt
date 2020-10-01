@@ -33,7 +33,7 @@ object BindingAdapters {
             }
         }
     }
-    @BindingAdapter( "android:textAndDrawableColor", )
+    @BindingAdapter( "android:textAndDrawableColor" )
     @JvmStatic
     fun TextView.setTextAndDrawablesColor(colorId: Int) {
         setTextAndCompoundDrawablesColor(colorId)

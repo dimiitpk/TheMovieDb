@@ -4,7 +4,6 @@ import android.app.DownloadManager
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
@@ -262,7 +261,7 @@ constructor(
         return getCurrentViewStateOrNew().sendingImageFileUri
     }
 
-    fun getPostersSize(): Int {
+    private fun getPostersSize(): Int {
         return getCurrentViewStateOrNew().posters?.size ?: 0
     }
 
@@ -270,13 +269,13 @@ constructor(
         return getCurrentViewStateOrNew().backdrops?.size ?: 0
     }
 
-    fun setSendingImageDownloadId(sendingImageDownloadId: Long?) {
+    private fun setSendingImageDownloadId(sendingImageDownloadId: Long?) {
         val update = getCurrentViewStateOrNew()
         update.sendingImageDownloadId = sendingImageDownloadId
         setViewState(update)
     }
 
-    fun getSendingImageDownloadId(): Long? {
+    private fun getSendingImageDownloadId(): Long? {
         return getCurrentViewStateOrNew().sendingImageDownloadId
     }
 

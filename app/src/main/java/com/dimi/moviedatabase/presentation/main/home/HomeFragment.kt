@@ -22,10 +22,8 @@ import com.dimi.moviedatabase.presentation.main.home.adapter.HomeModel
 import com.dimi.moviedatabase.presentation.main.home.adapter.HomeRecyclerAdapter
 import com.dimi.moviedatabase.presentation.main.home.state.HomeStateEvent
 import com.dimi.moviedatabase.presentation.main.home.viewmodel.*
-import com.dimi.moviedatabase.presentation.main.search.SearchFragmentArgs
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
-import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragmentArgs
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.recycler_view
 import kotlinx.android.synthetic.main.layout_home_toolbar.view.*

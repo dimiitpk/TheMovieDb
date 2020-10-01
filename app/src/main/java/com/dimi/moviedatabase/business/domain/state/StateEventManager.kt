@@ -24,7 +24,7 @@ class StateEventManager {
     }
 
     fun addStateEvent(stateEvent: StateEvent){
-        activeStateEvents.put(stateEvent.eventName(), stateEvent)
+        activeStateEvents[stateEvent.eventName()] = stateEvent
         syncNumActiveStateEvents()
     }
 

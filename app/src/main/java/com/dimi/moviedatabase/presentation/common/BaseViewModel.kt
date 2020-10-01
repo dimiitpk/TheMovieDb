@@ -1,14 +1,11 @@
 package com.dimi.moviedatabase.presentation.common
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.business.domain.state.*
 import com.dimi.moviedatabase.util.GenericErrors
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlin.reflect.KProperty
 import com.dimi.moviedatabase.business.domain.state.ViewState as ViewStateInterface
 
 
@@ -35,7 +32,7 @@ abstract class BaseViewModel<ViewState : ViewStateInterface> (
             setViewState(viewState)
         }
 
-        savingStateObserver = Observer() {
+        savingStateObserver = Observer {
             savedStateHandle.set(
                 getUniqueViewStateIdentifier(),
                 getViewStateCopyWithoutBigLists(it)
@@ -116,7 +113,7 @@ abstract class BaseViewModel<ViewState : ViewStateInterface> (
 
     fun printStateMessages() = dataChannelManager.printStateMessages()
 
-    fun cancelActiveJobs() = dataChannelManager.cancelJobs()
+    private fun cancelActiveJobs() = dataChannelManager.cancelJobs()
 
     abstract fun initNewViewState(): ViewState
 

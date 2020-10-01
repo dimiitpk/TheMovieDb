@@ -9,13 +9,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dimi.moviedatabase.R
-import com.dimi.moviedatabase.business.domain.model.*
+import com.dimi.moviedatabase.business.domain.model.Media
+import com.dimi.moviedatabase.business.domain.model.TvShow
+import com.dimi.moviedatabase.business.domain.model.Video
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.databinding.FragmentAboutBinding
-import com.dimi.moviedatabase.presentation.common.*
 import com.dimi.moviedatabase.presentation.common.VisibilityState.Displayed
 import com.dimi.moviedatabase.presentation.common.VisibilityState.Hidden
 import com.dimi.moviedatabase.presentation.common.adapters.VideoListAdapter
+import com.dimi.moviedatabase.presentation.common.isEllipsized
+import com.dimi.moviedatabase.presentation.common.visible
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
 import com.dimi.moviedatabase.presentation.main.view.OnAboutFragmentDataBindingListener
 import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragmentDirections
@@ -25,8 +28,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import kotlinx.coroutines.*
-import kotlin.collections.ArrayList
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
 
 @ExperimentalCoroutinesApi

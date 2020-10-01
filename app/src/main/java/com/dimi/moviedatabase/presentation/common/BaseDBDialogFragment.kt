@@ -1,3 +1,5 @@
+@file:Suppress("PropertyName")
+
 package com.dimi.moviedatabase.presentation.common
 
 import android.content.Context

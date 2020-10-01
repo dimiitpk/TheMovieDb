@@ -17,13 +17,6 @@
     <string name="season_and_episode_number_format">S%1$02dE%2$02d</string>
     <string name="videos_with_length">videos(%1$d)</string>
     <string name="as_string_format">as %s</string>
-    <string name="tv_shows_amount_format">%d tv shows</string>
-    <string name="movies_amount_format">%d movies</string>
-    <string name="persons_amount_format">%d persons</string>
-    <string name="episodes_amount_format">%d episodes</string>
-    <string name="episodes_brackets_format">(%d episodes)</string>
-    <string name="posters_amount_format">%d posters</string>
-    <string name="backdrop_amount_format">%d backdrops</string>
     <string name="number_slash_number">%1$d/%2$d</string>
 
 

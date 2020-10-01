@@ -2,8 +2,6 @@ package com.dimi.moviedatabase.presentation.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.bumptech.glide.RequestManager
-import com.dimi.moviedatabase.di.qualifiers.BusinessSource
 import com.dimi.moviedatabase.presentation.main.home.HomeFragment
 import com.dimi.moviedatabase.presentation.main.search.SearchFragment
 import com.dimi.moviedatabase.presentation.main.view.ViewMediaFragment

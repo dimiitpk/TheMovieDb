@@ -63,7 +63,7 @@ abstract class DataChannelManager<ViewState : ViewStateInterface> {
         return true
     }
 
-    fun isMessageStackEmpty(): Boolean {
+    private fun isMessageStackEmpty(): Boolean {
         return messageStack.isStackEmpty()
     }
 
@@ -93,10 +93,10 @@ abstract class DataChannelManager<ViewState : ViewStateInterface> {
     fun clearActiveStateEventCounter()
             = stateEventManager.clearActiveStateEventCounter()
 
-    fun addStateEvent(stateEvent: StateEvent)
+    private fun addStateEvent(stateEvent: StateEvent)
             = stateEventManager.addStateEvent(stateEvent)
 
-    fun removeStateEvent(stateEvent: StateEvent?)
+    private fun removeStateEvent(stateEvent: StateEvent?)
             = stateEventManager.removeStateEvent(stateEvent)
 
     private fun isStateEventActive(stateEvent: StateEvent)
@@ -106,7 +106,7 @@ abstract class DataChannelManager<ViewState : ViewStateInterface> {
         return isStateEventActive(stateEvent)
     }
 
-    fun getChannelScope(): CoroutineScope {
+    private fun getChannelScope(): CoroutineScope {
         return channelScope ?: setupNewChannelScope(CoroutineScope(IO))
     }
 

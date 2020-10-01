@@ -48,7 +48,7 @@ class SimilarMediaFragment :
                     }
                     binding.emptyListText.invisible()
                     if (viewState.mediaType == MediaType.PERSON)
-                        binding.infoText.text = resources.getString(R.string.tv_shows_amount_format, list.size)
+                        binding.infoText.text = resources.getQuantityString(R.plurals.tv_shows_amount_format, list.size, list.size)
                     else
                         binding.infoText.invisible()
                     binding.viewLayoutChange.visible()

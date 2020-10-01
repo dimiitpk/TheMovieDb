@@ -9,7 +9,6 @@ import com.bumptech.glide.RequestManager
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Image
 import com.dimi.moviedatabase.framework.network.NetworkConstants
-import com.dimi.moviedatabase.presentation.GlideApp
 
 class BackDropSlider
 constructor(val requestManager: RequestManager) :

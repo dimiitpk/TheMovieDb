@@ -6,8 +6,6 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.*
 import androidx.room.Index
 import com.dimi.moviedatabase.framework.cache.model.MediaListEntity
-import com.dimi.moviedatabase.framework.cache.model.MovieCacheEntity
-import com.dimi.moviedatabase.framework.cache.model.PersonCacheEntity
 import com.dimi.moviedatabase.framework.cache.model.TvShowCacheEntity
 
 @Entity(

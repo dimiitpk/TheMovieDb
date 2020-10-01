@@ -9,11 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.presentation.common.*
 import com.dimi.moviedatabase.util.Constants
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
 
 @FlowPreview

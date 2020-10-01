@@ -1,6 +1,5 @@
 package com.dimi.moviedatabase.business.domain.state
 
-import com.dimi.moviedatabase.business.domain.model.Media
 
 interface ViewState {
 

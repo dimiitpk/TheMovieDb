@@ -2,8 +2,6 @@ package com.dimi.moviedatabase.framework.cache.database
 
 import androidx.room.*
 import com.dimi.moviedatabase.framework.cache.model.*
-import com.dimi.moviedatabase.framework.cache.model.junction.MovieActorsCrossRef
-import com.dimi.moviedatabase.framework.cache.model.junction.MovieListCrossRef
 import com.dimi.moviedatabase.framework.cache.model.junction.TvShowListCrossRef
 import com.dimi.moviedatabase.framework.cache.model.junction.TvShowNetworkCrossRef
 import com.dimi.moviedatabase.framework.cache.model.relations.*

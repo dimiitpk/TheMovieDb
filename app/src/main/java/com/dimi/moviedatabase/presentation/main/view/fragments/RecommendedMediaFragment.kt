@@ -53,7 +53,7 @@ class RecommendedMediaFragment :
                     }
                     binding.emptyListText.invisible()
                     if (viewState.mediaType == MediaType.PERSON)
-                        binding.infoText.text = resources.getString(R.string.movies_amount_format, list.size)
+                        binding.infoText.text = resources.getQuantityString(R.plurals.movies_amount_format, list.size, list.size)
                     else
                         binding.infoText.invisible()
                     binding.viewLayoutChange.visible()

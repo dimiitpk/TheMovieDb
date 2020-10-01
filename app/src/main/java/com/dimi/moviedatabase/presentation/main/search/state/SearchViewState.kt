@@ -8,7 +8,6 @@ import com.dimi.moviedatabase.presentation.common.enums.SortFilter
 import com.dimi.moviedatabase.presentation.common.enums.SortOrder
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
-import com.dimi.moviedatabase.presentation.main.view.state.ViewMediaViewState
 import com.dimi.moviedatabase.util.Constants.LAYOUT_GRID_SPAN_COUNT
 import kotlinx.android.parcel.Parcelize
 
