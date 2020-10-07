@@ -30,7 +30,7 @@ constructor(private val movieCastNetworkMapper: MovieCastNetworkMapper) :
             voteCount = entity.voteCount,
             tagLine = entity.tagLine,
             castList = movieCastNetworkMapper.mapFromEntityList(
-                entities = entity.creditsResponse.cast
+                entities = entity.creditsResponse?.cast ?: emptyList()
             ),
             status = entity.status,
             homepage = entity.homepage,

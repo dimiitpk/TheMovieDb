@@ -54,7 +54,7 @@ class MovieRecommendationsUseCase(
                         )
                         DataState.data(
                             response = Response(
-                                message = RETRIEVING_RECOMMEND_MOVIES_SUCCESSFUL,
+                                message = USE_CASE_RECOMMENDED_MEDIA,
                                 messageType = MessageType.Success,
                                 uiComponentType = UIComponentType.None
                             ),
@@ -79,8 +79,6 @@ class MovieRecommendationsUseCase(
     }
 
     companion object {
-        const val RETRIEVING_RECOMMEND_MOVIES_SUCCESSFUL =
-            "Successfully retrieved recommended movies."
         const val RETRIEVING_RECOMMEND_MOVIES_FAILED =
             "Failed retrieving recommended movies."
     }

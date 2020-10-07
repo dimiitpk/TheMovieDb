@@ -34,7 +34,7 @@ class MovieCacheDataSourceImpl(
         return movieDaoService.getListOfMovies(query = query, page = page, genre = genre, mediaListType = mediaListType)
     }
 
-    override suspend fun getMovieDetails(movieId: Long): Movie {
-        return movieDaoService.getMovieDetails( movieId )
+    override suspend fun getMovie(movieId: Long): Movie {
+        return movieDaoService.getMovie( movieId )
     }
 }

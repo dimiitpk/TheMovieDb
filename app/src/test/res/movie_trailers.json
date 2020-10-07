@@ -1,0 +1,55 @@
+{
+  "id": 337401,
+  "results": [
+    {
+      "id": "5d221db394d8a87d3441b212",
+      "iso_639_1": "en",
+      "iso_3166_1": "US",
+      "key": "01ON04GCwKs",
+      "name": "Disney's Mulan - Official Teaser",
+      "site": "YouTube",
+      "size": 1080,
+      "type": "Teaser"
+    },
+    {
+      "id": "5de927b2a313b80014941c94",
+      "iso_639_1": "en",
+      "iso_3166_1": "US",
+      "key": "KK8FHdFluOQ",
+      "name": "Official Trailer",
+      "site": "YouTube",
+      "size": 1080,
+      "type": "Trailer"
+    },
+    {
+      "id": "5e56b58635811d00135d1e86",
+      "iso_639_1": "en",
+      "iso_3166_1": "US",
+      "key": "R-eFm--k21c",
+      "name": "Final Trailer",
+      "site": "YouTube",
+      "size": 1080,
+      "type": "Trailer"
+    },
+    {
+      "id": "5f3496aaf6fd180034289c29",
+      "iso_639_1": "en",
+      "iso_3166_1": "US",
+      "key": "bJbAZh3fv0g",
+      "name": "Coming Sept. 4 | Mulan | Disney+",
+      "site": "YouTube",
+      "size": 1080,
+      "type": "Teaser"
+    },
+    {
+      "id": "5f3c80838dbc330034a6eb97",
+      "iso_639_1": "en",
+      "iso_3166_1": "US",
+      "key": "1UXZEGYSwgg",
+      "name": "Coming Sept. 4 | Mulan | Disney+",
+      "site": "YouTube",
+      "size": 1080,
+      "type": "Featurette"
+    }
+  ]
+}

@@ -49,3 +49,64 @@ data class Movie(
         releaseDate,
         MediaType.MOVIE
     )
+{
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        if (!super.equals(other)) return false
+
+        other as Movie
+
+        if (id != other.id) return false
+        if (title != other.title) return false
+        if (popularity != other.popularity) return false
+        if (voteCount != other.voteCount) return false
+        if (releaseDate != other.releaseDate) return false
+        if (voteAverage != other.voteAverage) return false
+        if (overview != other.overview) return false
+        if (tagLine != other.tagLine) return false
+        if (posterPath != other.posterPath) return false
+        if (backdropPath != other.backdropPath) return false
+        if (genres != other.genres) return false
+        if (castList != other.castList) return false
+        if (budget != other.budget) return false
+        if (revenue != other.revenue) return false
+        if (status != other.status) return false
+        if (homepage != other.homepage) return false
+        if (originalTitle != other.originalTitle) return false
+        if (runtime != other.runtime) return false
+        if (imdbId != other.imdbId) return false
+        if (character != other.character) return false
+        if (actorId != other.actorId) return false
+        if (order != other.order) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + id.hashCode()
+        result = 31 * result + title.hashCode()
+        result = 31 * result + popularity.hashCode()
+        result = 31 * result + voteCount
+        result = 31 * result + (releaseDate?.hashCode() ?: 0)
+        result = 31 * result + voteAverage.hashCode()
+        result = 31 * result + overview.hashCode()
+        result = 31 * result + (tagLine?.hashCode() ?: 0)
+        result = 31 * result + (posterPath?.hashCode() ?: 0)
+        result = 31 * result + (backdropPath?.hashCode() ?: 0)
+        result = 31 * result + (genres?.hashCode() ?: 0)
+        result = 31 * result + (castList?.hashCode() ?: 0)
+        result = 31 * result + (budget ?: 0)
+        result = 31 * result + (revenue?.hashCode() ?: 0)
+        result = 31 * result + (status?.hashCode() ?: 0)
+        result = 31 * result + (homepage?.hashCode() ?: 0)
+        result = 31 * result + (originalTitle?.hashCode() ?: 0)
+        result = 31 * result + (runtime ?: 0)
+        result = 31 * result + (imdbId?.hashCode() ?: 0)
+        result = 31 * result + (character?.hashCode() ?: 0)
+        result = 31 * result + (actorId ?: 0)
+        result = 31 * result + (order ?: 0)
+        return result
+    }
+}

@@ -41,19 +41,19 @@ ext {
     buildToolsVersion = '29.0.3'
     ndkVersion = '21.3.6528147'
 
-    coroutinesVersion = '1.3.8'
+    coroutinesVersion = '1.3.9'
 
     supportLibVersion = '1.2.0'
 
-    coreVersion = '1.3.1'
+    coreVersion = '1.3.2'
     dataStoreVersion = '1.0.0-alpha01'
     hiltViewModels = '1.0.0-alpha02'
-    pagingVersion = '3.0.0-alpha06'
+    pagingVersion = '3.0.0-alpha07'
 
     fragmentKtxVersion = '1.2.5'
     liveDataKtxVersion = '2.2.0'
 
-    materialVersion = '1.3.0-alpha02'
+    materialVersion = '1.3.0-alpha03'
     materialDialogsVersion = '3.2.1'
     recyclerViewVersion = '1.2.0-alpha06'
     youtubeVersion = '10.0.5'
@@ -67,7 +67,13 @@ ext {
 
     roomVersion = '2.3.0-alpha02'
 
+    androidXCoreTest = '1.3.0'
+    // testing
     junitVersion = '4.13'
+    archCoreTesting = '2.1.0'
+    truthVersion = '1.0.1'
+    testCoroutines = '1.3.0'
+
     androidXJunitVersion = '1.1.2'
     espressoVersion = '3.3.0'
 }

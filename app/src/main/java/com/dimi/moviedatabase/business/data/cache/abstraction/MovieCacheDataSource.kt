@@ -27,7 +27,7 @@ interface MovieCacheDataSource {
         mediaListType: MediaListType? = null
     ): List<Movie>
 
-    suspend fun getMovieDetails(
+    suspend fun getMovie(
         movieId: Long
     ): Movie
 }

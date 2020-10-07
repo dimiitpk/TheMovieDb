@@ -50,7 +50,7 @@ class MovieImagesUseCase(
                     )
                     DataState.data(
                         response = Response(
-                            message = RETRIEVING_MOVIE_IMAGES_SUCCESSFUL,
+                            message = USE_CASE_IMAGES,
                             messageType = MessageType.Success,
                             uiComponentType = UIComponentType.None
                         ),
@@ -66,8 +66,6 @@ class MovieImagesUseCase(
     }
 
     companion object {
-        const val RETRIEVING_MOVIE_IMAGES_SUCCESSFUL =
-            "Successfully retrieved images for this movie."
         const val RETRIEVING_MOVIE_IMAGES_FAILED =
             "Failed retrieving images for this movie."
     }

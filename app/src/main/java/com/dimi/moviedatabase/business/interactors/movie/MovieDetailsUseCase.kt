@@ -37,12 +37,15 @@ class MovieDetailsUseCase(
             )
         },
         cacheCall = {
-            cacheDataSource.getMovieDetails(
+            cacheDataSource.getMovie(
                 movieId = movieId
             )
         }) {
 
         override suspend fun updateCache(networkObject: Movie): Response? {
+            var message = MESSAGE_DETAILS_QUERY_SUCCESSFUL
+            if (networkObject.id == -1L)
+                message = DETAILS_FAILED
             withContext(IO) {
                 launch {
                     try {
@@ -59,7 +62,10 @@ class MovieDetailsUseCase(
                                                 "MovieDetails",
                                                 "updateLocalDb: inserting cast: $cast"
                                             )
-                                            cacheDataSource.insertCast(person = cast, movieId = networkObject.id)
+                                            cacheDataSource.insertCast(
+                                                person = cast,
+                                                movieId = networkObject.id
+                                            )
                                         }
 
                                     } catch (e: Exception) {
@@ -82,7 +88,7 @@ class MovieDetailsUseCase(
                 }
             }
             return Response(
-                message = MESSAGE_DETAILS_QUERY_SUCCESSFUL,
+                message = message,
                 uiComponentType = UIComponentType.None,
                 messageType = MessageType.Success
             )
@@ -98,4 +104,8 @@ class MovieDetailsUseCase(
         }
 
     }.result
+
+    companion object {
+        const val DETAILS_FAILED = "Failed to retrieve movie details."
+    }
 }

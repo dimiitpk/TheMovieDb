@@ -40,7 +40,7 @@ constructor(
                     actor
                 }
                 .sortedBy { it.priority }
-        } else emptyList()
+        } else null
         tvShow.seasons = seasonCacheMapper.mapFromEntityList(seasons)
         if (tvShow.id == tvShowNetworks.tvShow.id)
             tvShow.networks = networkCacheMapper.mapFromEntityList(tvShowNetworks.networks)
@@ -101,7 +101,7 @@ constructor(
                     actor
                 }
                 .sortedBy { it.priority }
-        } else emptyList()
+        } else null
         return movie
     }
 

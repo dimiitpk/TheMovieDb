@@ -54,7 +54,7 @@ class SimilarMoviesUseCase(
                         )
                         DataState.data(
                             response = Response(
-                                message = RETRIEVING_SIMILAR_MOVIES_SUCCESSFUL,
+                                message = USE_CASE_SIMILAR_MEDIA,
                                 messageType = MessageType.Success,
                                 uiComponentType = UIComponentType.None
                             ),
@@ -79,8 +79,6 @@ class SimilarMoviesUseCase(
     }
 
     companion object {
-        const val RETRIEVING_SIMILAR_MOVIES_SUCCESSFUL =
-            "Successfully retrieved similar movies."
         const val RETRIEVING_SIMILAR_MOVIES_FAILED =
             "Failed retrieving similar movies."
     }

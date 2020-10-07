@@ -78,8 +78,6 @@ abstract class NetworkBoundResource<NetworkResponse, CacheResponse, ViewState : 
 
         val cacheResult = safeCacheCall(dispatcher) { cacheCall.invoke() }
 
-
-
         var jobCompleteMarker: StateEvent? = null
         if (markJobComplete) {
             jobCompleteMarker = stateEvent

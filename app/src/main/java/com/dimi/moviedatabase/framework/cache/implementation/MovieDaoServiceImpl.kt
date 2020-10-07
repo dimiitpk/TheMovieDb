@@ -10,9 +10,6 @@ import com.dimi.moviedatabase.framework.cache.model.junction.MovieListCrossRef
 import com.dimi.moviedatabase.framework.cache.model.junction.MovieActorsCrossRef
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.util.GENRE_DEFAULT
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MovieDaoServiceImpl(
     private val movieDao: MovieDao,
@@ -30,11 +27,13 @@ class MovieDaoServiceImpl(
         return when {
             upsert -> movieDao.upsert(cacheMapper.movieCacheMapper.mapToEntity(movie))
             mediaListType != null -> {
+                println("VAZISEDA")
                 movieDao.insert(
                     cacheMapper.movieCacheMapper.mapToEntity(
                         movie
                     )
                 ).let {
+                    println("VAZISEDA2")
                     movieDao.insert(
                         MovieListCrossRef(
                             mediaListId = mediaListType.code,
@@ -49,17 +48,12 @@ class MovieDaoServiceImpl(
     }
 
     override suspend fun insertMovies(movies: List<Movie>) {
-
-        withContext(IO) {
-            try {
-                launch {
-                    movieDao.insert(
-                        *cacheMapper.movieCacheMapper.mapToEntityList(movies).toTypedArray()
-                    )
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+        try {
+            movieDao.insert(
+                *cacheMapper.movieCacheMapper.mapToEntityList(movies).toTypedArray()
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -88,7 +82,6 @@ class MovieDaoServiceImpl(
         genre: Int,
         mediaListType: MediaListType?
     ): List<Movie> {
-
         return if (mediaListType != null)
             cacheMapper.mapFromMoviesByList(movieDao.getMoviesByList(mediaListType.code), page)
         else {
@@ -102,7 +95,7 @@ class MovieDaoServiceImpl(
         }
     }
 
-    override suspend fun getMovieDetails(movieId: Long): Movie {
+    override suspend fun getMovie(movieId: Long): Movie {
         return cacheMapper.mapFromEntityWithCastList(
             movieDao.getMovieWithCast(movieId = movieId)
         )

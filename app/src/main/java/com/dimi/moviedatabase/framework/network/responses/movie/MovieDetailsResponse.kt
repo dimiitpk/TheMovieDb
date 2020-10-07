@@ -82,5 +82,5 @@ data class MovieDetailsResponse(
 
     @SerializedName("credits")
     @Expose
-    var creditsResponse: CreditsResponse<MovieCastNetworkEntity>
+    var creditsResponse: CreditsResponse<MovieCastNetworkEntity>?
 )

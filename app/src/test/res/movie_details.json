@@ -1,0 +1,661 @@
+{
+  "adult": false,
+  "backdrop_path": "/zzWGRw277MNoCs3zhyG3YmYQsXv.jpg",
+  "belongs_to_collection": null,
+  "budget": 200000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "https://movies.disney.com/mulan-2020d",
+  "id": 337401,
+  "imdb_id": "tt4566758",
+  "original_language": "en",
+  "original_title": "Mulan",
+  "overview": "When the Emperor of China issues a decree that one man per family must serve in the Imperial Chinese Army to defend the country from Huns, Hua Mulan, the eldest daughter of an honored warrior, steps in to take the place of her ailing father. She is spirited, determined and quick on her feet. Disguised as a man by the name of Hua Jun, she is tested every step of the way and must harness her innermost strength and embrace her true potential.",
+  "popularity": 1024.381,
+  "poster_path": "/aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg",
+  "production_companies": [
+    {
+      "id": 2,
+      "logo_path": "/wdrCwmRnLFJhEoH8GSfymY85KHT.png",
+      "name": "Walt Disney Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 14714,
+      "logo_path": "/oQHaOZEnPzlJACVTisV0FICrS82.png",
+      "name": "China Film Group Corporation",
+      "origin_country": "CN"
+    },
+    {
+      "id": 103698,
+      "logo_path": "/qS01bSMe274ecTdrgyO3BBvzfKK.png",
+      "name": "Good Fear",
+      "origin_country": "US"
+    },
+    {
+      "id": 89254,
+      "logo_path": null,
+      "name": "Jason T. Reed Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2020-09-04",
+  "revenue": 57000000,
+  "runtime": 115,
+  "spoken_languages": [
+    {
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Mulan",
+  "video": false,
+  "vote_average": 7.3,
+  "vote_count": 2299,
+  "credits": {
+    "cast": [
+      {
+        "cast_id": 12,
+        "character": "Hua Mulan",
+        "credit_id": "5a1f27efc3a3680b930821c6",
+        "gender": 1,
+        "id": 122503,
+        "name": "Liu Yifei",
+        "order": 0,
+        "profile_path": "/cL6JccAYqiZQEAIEFObEUC9LTt7.jpg"
+      },
+      {
+        "cast_id": 15,
+        "character": "The Emperor",
+        "credit_id": "5acfa5ef9251413b39001d5c",
+        "gender": 2,
+        "id": 1336,
+        "name": "Jet Li",
+        "order": 2,
+        "profile_path": "/5a6u17dAf11kLvdRUG6QdoRRURj.jpg"
+      },
+      {
+        "cast_id": 30,
+        "character": "Hua Zhou",
+        "credit_id": "5da06cc6ae3668001f209176",
+        "gender": 2,
+        "id": 21629,
+        "name": "Tzi Ma",
+        "order": 3,
+        "profile_path": "/x4fz0LCIiBNGdil3nBYO22W7QJ0.jpg"
+      },
+      {
+        "cast_id": 13,
+        "character": "Commander Tung",
+        "credit_id": "5ace9f2d0e0a267f9a02e73e",
+        "gender": 2,
+        "id": 1341,
+        "name": "Donnie Yen",
+        "order": 4,
+        "profile_path": "/hTlhrrZMj8hZVvD17j4KyAFWBHc.jpg"
+      },
+      {
+        "cast_id": 14,
+        "character": "Xian Niang",
+        "credit_id": "5acfa5ddc3a368738e0020ff",
+        "gender": 1,
+        "id": 643,
+        "name": "Gong Li",
+        "order": 5,
+        "profile_path": "/uP3Fs3QUsGBxhNqGFWMnN1Z2l8z.jpg"
+      },
+      {
+        "cast_id": 22,
+        "character": "Böri Khan",
+        "credit_id": "5b5a32b7c3a3686c140042d9",
+        "gender": 2,
+        "id": 58319,
+        "name": "Jason Scott Lee",
+        "order": 6,
+        "profile_path": "/7jObZCM3diuPV0WlKkzOd4uE2CJ.jpg"
+      },
+      {
+        "cast_id": 35,
+        "character": "Chen Honghui",
+        "credit_id": "5e3a883743250f0019c71c40",
+        "gender": 0,
+        "id": 1305610,
+        "name": "Yoson An",
+        "order": 7,
+        "profile_path": "/2hYX4VOpJEGzaOrS9xwe8qPkKJQ.jpg"
+      },
+      {
+        "cast_id": 29,
+        "character": "Hua Li",
+        "credit_id": "5da06cb54a2226001fe0c2dc",
+        "gender": 1,
+        "id": 74073,
+        "name": "Rosalind Chao",
+        "order": 8,
+        "profile_path": "/ejUMD59T6txpKmNqIBroXBjyDHx.jpg"
+      },
+      {
+        "cast_id": 33,
+        "character": "The Matchmaker",
+        "credit_id": "5da06d694a2226002be0de84",
+        "gender": 1,
+        "id": 1624,
+        "name": "Cheng Pei-Pei",
+        "order": 9,
+        "profile_path": "/l8ZFuYjqJpwqYFcHJHEKCNFkdx.jpg"
+      },
+      {
+        "cast_id": 20,
+        "character": "Sergeant Qiang",
+        "credit_id": "5b05d68ec3a3684c9b0043a7",
+        "gender": 2,
+        "id": 61703,
+        "name": "Ron Yuan",
+        "order": 10,
+        "profile_path": "/7Co2MdR8T5zlXTrdZ9Z3qjlmKdV.jpg"
+      },
+      {
+        "cast_id": 34,
+        "character": "Yao",
+        "credit_id": "5da06d91e54d5d001182a3b6",
+        "gender": 0,
+        "id": 1381726,
+        "name": "Chen Tang",
+        "order": 11,
+        "profile_path": null
+      },
+      {
+        "cast_id": 48,
+        "character": "Cricket",
+        "credit_id": "5f53dcdc848eb900375edf7c",
+        "gender": 0,
+        "id": 2766946,
+        "name": "Jun Yu",
+        "order": 12,
+        "profile_path": null
+      },
+      {
+        "cast_id": 25,
+        "character": "Po",
+        "credit_id": "5b7663c09251411d9101e451",
+        "gender": 0,
+        "id": 74304,
+        "name": "Doua Moua",
+        "order": 13,
+        "profile_path": null
+      },
+      {
+        "cast_id": 24,
+        "character": "Ling",
+        "credit_id": "5b7663a09251411d8e01e9d5",
+        "gender": 2,
+        "id": 447244,
+        "name": "Jimmy Wong",
+        "order": 14,
+        "profile_path": "/hKdinRUFu5aladr38gbKQ7Cyz1q.jpg"
+      },
+      {
+        "cast_id": 47,
+        "character": "Esteemed Guest",
+        "credit_id": "5f525c4dec18790038f87c92",
+        "gender": 1,
+        "id": 21702,
+        "name": "Ming-Na Wen",
+        "order": 15,
+        "profile_path": "/eX7U4rXvXNsscog43qF02cPHUWI.jpg"
+      },
+      {
+        "cast_id": 31,
+        "character": "The Chancellor",
+        "credit_id": "5da06d124a2226001fe0c430",
+        "gender": 2,
+        "id": 109019,
+        "name": "Nelson Lee",
+        "order": 16,
+        "profile_path": "/3ukZNKKkzrOD3t0LkkVhe3cGMVy.jpg"
+      },
+      {
+        "cast_id": 40,
+        "character": "Village Magistrate",
+        "credit_id": "5eb5a5b2c3514c002058a348",
+        "gender": 2,
+        "id": 1255311,
+        "name": "Hoon Lee",
+        "order": 17,
+        "profile_path": "/3Ux4nTEfPySyZg6yBlu1uXR1TyT.jpg"
+      },
+      {
+        "cast_id": 41,
+        "character": "Young Mulan",
+        "credit_id": "5eb5a5e4cc277c002068a540",
+        "gender": 0,
+        "id": 2630268,
+        "name": "Crystal Rao",
+        "order": 18,
+        "profile_path": null
+      },
+      {
+        "cast_id": 49,
+        "character": "Young Xiu",
+        "credit_id": "5f53dd0aec18790037fe5d71",
+        "gender": 0,
+        "id": 2766947,
+        "name": "Elena Askin",
+        "order": 19,
+        "profile_path": null
+      },
+      {
+        "cast_id": 50,
+        "character": "Longwei",
+        "credit_id": "5f53dd20a0b6900033cfdfd9",
+        "gender": 0,
+        "id": 2766948,
+        "name": "Vincent Feng",
+        "order": 20,
+        "profile_path": null
+      },
+      {
+        "cast_id": 51,
+        "character": "Young Soldier",
+        "credit_id": "5f53dd4966540800320954b4",
+        "gender": 0,
+        "id": 2766949,
+        "name": "R.J. O'Young",
+        "order": 21,
+        "profile_path": null
+      },
+      {
+        "cast_id": 52,
+        "character": "Duba Tegin",
+        "credit_id": "5f53dd7646f3540038199054",
+        "gender": 2,
+        "id": 2974,
+        "name": "Roger Yuan",
+        "order": 22,
+        "profile_path": "/jHdxbT6n3ToYKw0DVFIUkva86SO.jpg"
+      },
+      {
+        "cast_id": 53,
+        "character": "Tulugui Tegin",
+        "credit_id": "5f53dd86665408003409952b",
+        "gender": 2,
+        "id": 1746630,
+        "name": "Jenson Cheng",
+        "order": 23,
+        "profile_path": "/AkBawKOZaYcTjDbqBgA2s900OoY.jpg"
+      },
+      {
+        "cast_id": 54,
+        "character": "Red Fez",
+        "credit_id": "5f53ddb8848eb900356306bb",
+        "gender": 2,
+        "id": 1496153,
+        "name": "Arka Das",
+        "order": 24,
+        "profile_path": "/hbmlfI4zeChzGMskEcO3kpjfa31.jpg"
+      },
+      {
+        "cast_id": 55,
+        "character": "Kilifu Tegin",
+        "credit_id": "5f53ddedb234b900372161f6",
+        "gender": 2,
+        "id": 84609,
+        "name": "Jen Sung",
+        "order": 25,
+        "profile_path": "/e9c3vaTlESZHWOHCOttmCH9AWN7.jpg"
+      },
+      {
+        "cast_id": 56,
+        "character": "Bati Tegin",
+        "credit_id": "5f53de00d705940034cb7184",
+        "gender": 0,
+        "id": 1558030,
+        "name": "King Lau",
+        "order": 26,
+        "profile_path": "/bkU5kJloq7Wkar3GCTKZ3R8gfOS.jpg"
+      },
+      {
+        "cast_id": 32,
+        "character": "Hua Xiu",
+        "credit_id": "5da06d484a22260013e0804f",
+        "gender": 0,
+        "id": 571567,
+        "name": "Xana Tang",
+        "order": 27,
+        "profile_path": "/1z2Nn5KSAq82yfsd7IXYxBMI3T2.jpg"
+      },
+      {
+        "cast_id": 57,
+        "character": "Stallion Tegin",
+        "credit_id": "5f53de12848eb900366180f5",
+        "gender": 2,
+        "id": 1818132,
+        "name": "Zhaidarbek Kunguzhinov",
+        "order": 28,
+        "profile_path": null
+      },
+      {
+        "cast_id": 58,
+        "character": "Garrison Commander",
+        "credit_id": "5f53de89d705940033ccc275",
+        "gender": 0,
+        "id": 2766950,
+        "name": "Gary Young",
+        "order": 29,
+        "profile_path": null
+      },
+      {
+        "cast_id": 59,
+        "character": "Garrison Scout",
+        "credit_id": "5f53deab55bc350033332890",
+        "gender": 0,
+        "id": 2766951,
+        "name": "Wolf Chen",
+        "order": 30,
+        "profile_path": null
+      },
+      {
+        "cast_id": 60,
+        "character": "Senior Officer",
+        "credit_id": "5f53decc6654080034099b3a",
+        "gender": 2,
+        "id": 2313015,
+        "name": "Owen Kwong",
+        "order": 31,
+        "profile_path": "/dr30VDiMLFBIxR8sNu6h2wgWTug.jpg"
+      },
+      {
+        "cast_id": 37,
+        "character": "Lee Xian",
+        "credit_id": "5e9a125f0b5fd60015c03478",
+        "gender": 2,
+        "id": 2605226,
+        "name": "Radhesh Aria",
+        "order": 32,
+        "profile_path": null
+      }
+    ],
+    "crew": [
+      {
+        "credit_id": "57f4a5dd9251411c7e00241d",
+        "department": "Production",
+        "gender": 2,
+        "id": 298,
+        "job": "Producer",
+        "name": "Chris Bender",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5ad044d10e0a26302a0024ec",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 3657,
+        "job": "Costume Design",
+        "name": "Bina Daigeler",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5b823b300e0a264592022904",
+        "department": "Art",
+        "gender": 2,
+        "id": 1314,
+        "job": "Production Design",
+        "name": "Grant Major",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56ae4f350398003588ae82",
+        "department": "Sound",
+        "gender": 0,
+        "id": 5338,
+        "job": "Sound Designer",
+        "name": "Kyrsten Mate",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56ae2d1d78f200329a95a5",
+        "department": "Art",
+        "gender": 1,
+        "id": 8706,
+        "job": "Set Decoration",
+        "name": "Anne Kuljian",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5b81cdc192514159d9016ed0",
+        "department": "Sound",
+        "gender": 2,
+        "id": 5553,
+        "job": "Original Music Composer",
+        "name": "Harry Gregson-Williams",
+        "profile_path": null
+      },
+      {
+        "credit_id": "58a400c592514165b90007b3",
+        "department": "Directing",
+        "gender": 1,
+        "id": 15287,
+        "job": "Director",
+        "name": "Niki Caro",
+        "profile_path": "/ooJcmnhX9qJ0E7bCdSQCxr7JViH.jpg"
+      },
+      {
+        "credit_id": "5b823b200e0a26459c01f0b2",
+        "department": "Editing",
+        "gender": 2,
+        "id": 15291,
+        "job": "Editor",
+        "name": "David Coulson",
+        "profile_path": null
+      },
+      {
+        "credit_id": "57f4a649c3a368054e001f87",
+        "department": "Production",
+        "gender": 2,
+        "id": 20223,
+        "job": "Producer",
+        "name": "J.C. Spink",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5ad044eb92514138fe0022a6",
+        "department": "Camera",
+        "gender": 1,
+        "id": 57849,
+        "job": "Director of Photography",
+        "name": "Mandy Walker",
+        "profile_path": "/VCgawTuKQygLce54PQ9QcVjL7y.jpg"
+      },
+      {
+        "credit_id": "57f4a655c3a368055900238d",
+        "department": "Production",
+        "gender": 0,
+        "id": 62241,
+        "job": "Producer",
+        "name": "Jake Weiner",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f29f0d7d8cc4a00381d9cc9",
+        "department": "Writing",
+        "gender": 2,
+        "id": 67802,
+        "job": "Screenplay",
+        "name": "Rick Jaffa",
+        "profile_path": "/iki2KpmMFhLIdq3pvHhq7tit8Q1.jpg"
+      },
+      {
+        "credit_id": "5f29f0cf9f37b000352da1d3",
+        "department": "Writing",
+        "gender": 1,
+        "id": 67803,
+        "job": "Screenplay",
+        "name": "Amanda Silver",
+        "profile_path": "/j26E4ifZClUceVocOmDG9sWm7uP.jpg"
+      },
+      {
+        "credit_id": "57f4a6359251411c6c002216",
+        "department": "Production",
+        "gender": 0,
+        "id": 100186,
+        "job": "Producer",
+        "name": "Jason Reed",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56aebb1511aa00341d4a79",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 1361035,
+        "job": "Makeup Artist",
+        "name": "Jacqui Leung",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56af029661fc003710037e",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 1425359,
+        "job": "Makeup Artist",
+        "name": "Chiara Tripodi",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56aef1e627190037ee46a0",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 1431503,
+        "job": "Makeup Artist",
+        "name": "Claire Rutledge",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56aece1d78f200359a8e00",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 1457305,
+        "job": "Makeup Artist",
+        "name": "Georgia Lockhart-Adams",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56aee290cf510032a6a2d7",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 1609177,
+        "job": "Makeup Artist",
+        "name": "Michele Perry",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f29f109435abd00367ea5f2",
+        "department": "Writing",
+        "gender": 0,
+        "id": 1689366,
+        "job": "Screenplay",
+        "name": "Lauren Hynek",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f29f1002d8ef3791fd5c060",
+        "department": "Writing",
+        "gender": 0,
+        "id": 1689367,
+        "job": "Screenplay",
+        "name": "Elizabeth Martin",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56aead1511aa00361fc6cb",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 1805804,
+        "job": "Makeup Artist",
+        "name": "Shay Lawrence",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5eadd6fb0c3ec80025cc0b1d",
+        "department": "Crew",
+        "gender": 2,
+        "id": 2095539,
+        "job": "Stunt Double",
+        "name": "Tori Marsh",
+        "profile_path": "/zcou4W6DXf9xXkToynhYtPNhCoa.jpg"
+      },
+      {
+        "credit_id": "5e62447455c92600155b202d",
+        "department": "Production",
+        "gender": 2,
+        "id": 2104569,
+        "job": "Producer",
+        "name": "Tendo Nagenda",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5f56ae9b6a300b0036dcda8e",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 2201972,
+        "job": "Makeup Artist",
+        "name": "Leanne Hoare",
+        "profile_path": null
+      },
+      {
+        "credit_id": "5ea1b504e942be001d1f59c2",
+        "department": "Crew",
+        "gender": 1,
+        "id": 2612360,
+        "job": "Stunt Double",
+        "name": "Ashlee Fidow",
+        "profile_path": "/q0UwYu1A9BXUAuQumCIwOAsSVj.jpg"
+      },
+      {
+        "credit_id": "5f24d72af0647c0032239809",
+        "department": "Visual Effects",
+        "gender": 2,
+        "id": 2725433,
+        "job": "Visual Effects",
+        "name": "Joe Howes",
+        "profile_path": "/qKNYWKmGDYDZt2SnNds8a5jv2av.jpg"
+      },
+      {
+        "credit_id": "5f56af1f350398003588b2c6",
+        "department": "Costume & Make-Up",
+        "gender": 0,
+        "id": 2769344,
+        "job": "Makeup Artist",
+        "name": "Ally Williams",
+        "profile_path": null
+      }
+    ]
+  }
+}

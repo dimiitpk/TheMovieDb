@@ -53,10 +53,10 @@ fun String?.toDate() : Date? {
 }
 
 fun <T> List<T>.cutList(page: Int): List<T> {
-    var limit = (page * NetworkConstants.PAGE_SIZE) - 1
+    var limit = (page * NetworkConstants.PAGE_SIZE)
     return if (this.lastIndex == -1) listOf()
     else {
-        if (limit > this.size) limit = this.lastIndex
+        if (limit > this.size) limit = this.size
         this.subList(0, limit).toList()
     }
 }
