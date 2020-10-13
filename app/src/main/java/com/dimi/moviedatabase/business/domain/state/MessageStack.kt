@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.android.parcel.IgnoredOnParcel
 import java.lang.IndexOutOfBoundsException
+import kotlin.collections.ArrayList
 
 class MessageStack: ArrayList<StateMessage>() {
 

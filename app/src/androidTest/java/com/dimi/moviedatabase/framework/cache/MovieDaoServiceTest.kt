@@ -11,7 +11,6 @@ import com.dimi.moviedatabase.framework.data.PeopleFactory
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.util.AndroidTestConstants.TEST_INVALID_MOVIE_ID
 import com.dimi.moviedatabase.util.AndroidTestConstants.TEST_VALID_MOVIE_ID
-import com.dimi.moviedatabase.util.printLogD
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -41,9 +40,6 @@ class MovieDaoServiceTest {
     lateinit var cacheMapper: CacheMapper
 
     @Inject
-    lateinit var movieFactory: MovieFactory
-
-    @Inject
     lateinit var peopleFactory: PeopleFactory
 
     private lateinit var movieDaoService: MovieCacheDataSource
@@ -59,7 +55,7 @@ class MovieDaoServiceTest {
     @Test
     fun insertMovie() = runBlocking {
 
-        val movie = movieFactory.createMovie(TEST_VALID_MOVIE_ID)
+        val movie = MovieFactory.createMovie(TEST_VALID_MOVIE_ID)
         movieDaoService.insertMovie(movie)
 
         val movieFromCache =
@@ -72,10 +68,10 @@ class MovieDaoServiceTest {
     fun insertMovieInMediaList() {
         runBlocking {
 
-            val movie = movieFactory.createMovie(TEST_VALID_MOVIE_ID)
-            val movie1 = movieFactory.createMovie(12)
-            val movie2 = movieFactory.createMovie(23)
-            val movie3 = movieFactory.createMovie(44)
+            val movie = MovieFactory.createMovie(TEST_VALID_MOVIE_ID)
+            val movie1 = MovieFactory.createMovie(12)
+            val movie2 = MovieFactory.createMovie(23)
+            val movie3 = MovieFactory.createMovie(44)
             movieDaoService.insertMovie(
                 movie = movie,
                 upsert = false,
@@ -102,7 +98,7 @@ class MovieDaoServiceTest {
             )
 
             val movieFromCache =
-                movieDaoService.getListOfMovies(page = 1, mediaListType = MediaListType.POPULAR)
+                movieDaoService.getListOfMovies(mediaListType = MediaListType.POPULAR)
 
             assertThat(movieFromCache).hasSize(4)
         }
@@ -112,7 +108,7 @@ class MovieDaoServiceTest {
     fun insertCast()  {
         runBlocking {
 
-            val movie = movieFactory.createMovie(TEST_VALID_MOVIE_ID)
+            val movie = MovieFactory.createMovie(TEST_VALID_MOVIE_ID)
             movieDaoService.insertMovie(movie)
             val person = peopleFactory.createPerson(1)
             movieDaoService.insertCast(person, movie.id)
@@ -126,13 +122,13 @@ class MovieDaoServiceTest {
     fun insertMovies() {
         runBlocking {
 
-            val movie = movieFactory.createMovie(TEST_VALID_MOVIE_ID)
-            val movie2 = movieFactory.createMovie(TEST_INVALID_MOVIE_ID)
+            val movie = MovieFactory.createMovie(TEST_VALID_MOVIE_ID)
+            val movie2 = MovieFactory.createMovie(TEST_INVALID_MOVIE_ID)
 
             movieDaoService.insertMovies(listOf(movie, movie2))
 
 
-            val moviesFromCache = movieDaoService.getListOfMovies(page = 1)
+            val moviesFromCache = movieDaoService.getListOfMovies()
 
             assertThat(moviesFromCache).containsExactly(movie, movie2)
         }
@@ -141,7 +137,7 @@ class MovieDaoServiceTest {
     @Test
     fun updateMovie() {
         runBlocking {
-            val movie = movieFactory.createMovie(TEST_VALID_MOVIE_ID)
+            val movie = MovieFactory.createMovie(TEST_VALID_MOVIE_ID)
             movieDaoService.insertMovie(movie)
 
             movie.tagLine = "Test From this Method"
@@ -155,7 +151,7 @@ class MovieDaoServiceTest {
     @Test
     fun getMovie() {
         runBlocking {
-            val movie = movieFactory.createMovie(TEST_VALID_MOVIE_ID)
+            val movie = MovieFactory.createMovie(TEST_VALID_MOVIE_ID)
             movieDaoService.insertMovie(movie)
 
             assertThat(movie).isEqualTo(movieDaoService.getMovie(TEST_VALID_MOVIE_ID))
@@ -166,11 +162,10 @@ class MovieDaoServiceTest {
     fun getListOfMovies() {
 
         runBlocking {
-            val movies = movieFactory.createMovieList(100)
+            val movies = MovieFactory.createMovieList(100)
             movieDaoService.insertMovies(movies)
 
-            assertThat(movies).containsAtLeastElementsIn(movieDaoService.getListOfMovies(page = 1))
+            assertThat(movies).containsAtLeastElementsIn(movieDaoService.getListOfMovies())
         }
     }
-
 }

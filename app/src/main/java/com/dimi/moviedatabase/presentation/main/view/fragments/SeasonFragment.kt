@@ -70,7 +70,6 @@ class SeasonFragment :
             addItemDecoration(spaceDecoration)
             recyclerAdapter =
                 SeasonAdapter(
-                    requestManager,
                     this@SeasonFragment
                 )
             adapter = recyclerAdapter

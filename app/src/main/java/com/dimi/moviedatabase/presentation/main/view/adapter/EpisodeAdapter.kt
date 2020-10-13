@@ -11,7 +11,6 @@ import com.dimi.moviedatabase.business.domain.model.Episode
 import com.dimi.moviedatabase.databinding.LayoutEpisodeListItemBinding
 
 class EpisodeAdapter(
-    private val requestManager: RequestManager,
     private val interaction: Interaction? = null
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -48,17 +47,6 @@ class EpisodeAdapter(
 
     override fun getItemCount(): Int {
         return differ.currentList.size
-    }
-
-    fun preloadGlideImages(
-        list: List<Episode>
-    ) {
-//        for (episode in list) {
-//            if (episode.stillPath != null)
-//                requestManager
-//                    .load(SMALL_IMAGE_URL_PREFIX + episode.stillPath)
-//                    .preload()
-//        }
     }
 
     fun submitList(list: List<Episode>?) {

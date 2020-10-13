@@ -17,14 +17,14 @@ data class Movie(
     var tagLine: String?,
     override var posterPath: String?,
     override var backdropPath: String?,
-    override var genres: List<Int>? = null,
-    override var castList: List<Person>? = null,
+    var genres: List<Int>? = null,
+    var castList: List<Person>? = null,
     var budget: Int? = null,
     var revenue: Long? = null,
-    override var status: String? = null,
-    override var homepage: String? = null,
-    override var originalTitle: String? = null,
-    override var runtime: Int? = null,
+    var status: String? = null,
+    var homepage: String? = null,
+    var originalTitle: String? = null,
+    var runtime: Int? = null,
     var imdbId: String? = null,
     override var character: String? = null,
     var actorId: Int? = null,
@@ -39,17 +39,10 @@ data class Movie(
         overview,
         posterPath,
         backdropPath,
-        genres,
-        castList,
-        runtime,
-        status,
-        originalTitle,
-        homepage,
         character,
         releaseDate,
         MediaType.MOVIE
-    )
-{
+    ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

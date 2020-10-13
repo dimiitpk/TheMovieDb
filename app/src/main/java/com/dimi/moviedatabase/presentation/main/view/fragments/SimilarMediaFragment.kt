@@ -39,11 +39,8 @@ class SimilarMediaFragment :
 
                 viewState.similarMedia?.let { list ->
                     recyclerAdapter.apply {
-                        preloadGlideImages(
-                            list = list
-                        )
                         submitList(
-                            viewState.similarMedia, false
+                            viewState.similarMedia
                         )
                     }
                     binding.emptyListText.invisible()
@@ -72,7 +69,6 @@ class SimilarMediaFragment :
             recyclerAdapter =
                 MediaListAdapter(
                     layout = layoutManager as StaggeredGridLayoutManager,
-                    requestManager = requestManager,
                     interaction = this@SimilarMediaFragment
                 )
             adapter = recyclerAdapter

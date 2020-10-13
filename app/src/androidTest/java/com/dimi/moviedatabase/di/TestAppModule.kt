@@ -1,5 +1,6 @@
 package com.dimi.moviedatabase.di
 
+import android.app.Application
 import android.content.ContentValues
 import android.content.Context
 import androidx.room.OnConflictStrategy
@@ -7,9 +8,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dimi.moviedatabase.framework.cache.database.AppDatabase
-import com.dimi.moviedatabase.framework.cache.database.MovieDao
 import com.dimi.moviedatabase.framework.data.MovieFactory
-import com.dimi.moviedatabase.framework.data.PeopleFactory
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import dagger.Module
 import dagger.Provides
@@ -17,8 +16,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
 import java.util.concurrent.Executors
 import javax.inject.Named
 
@@ -27,13 +24,13 @@ import javax.inject.Named
 @InstallIn(ApplicationComponent::class)
 object TestAppModule {
 
-//    @Provides
-//    fun provideMovieFactory() = MovieFactory()
-//
-//    @Provides
-//    fun providePeopleFactory() = PeopleFactory()
+    @Provides
+    fun provideMovieFactory(
+        application: Application
+    ): MovieFactory {
+        return MovieFactory(application)
+    }
 
-    @ExperimentalCoroutinesApi
     @Provides
     @Named("test_db")
     fun provideInMemoryDb(

@@ -27,13 +27,11 @@ class MovieDaoServiceImpl(
         return when {
             upsert -> movieDao.upsert(cacheMapper.movieCacheMapper.mapToEntity(movie))
             mediaListType != null -> {
-                println("VAZISEDA")
                 movieDao.insert(
                     cacheMapper.movieCacheMapper.mapToEntity(
                         movie
                     )
                 ).let {
-                    println("VAZISEDA2")
                     movieDao.insert(
                         MovieListCrossRef(
                             mediaListId = mediaListType.code,

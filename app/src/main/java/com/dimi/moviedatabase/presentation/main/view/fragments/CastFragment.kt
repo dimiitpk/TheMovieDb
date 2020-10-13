@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.request.RequestOptions
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Media
+import com.dimi.moviedatabase.business.domain.model.Movie
 import com.dimi.moviedatabase.business.domain.model.Person
+import com.dimi.moviedatabase.business.domain.model.TvShow
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.databinding.LayoutRecyclerViewBinding
 import com.dimi.moviedatabase.presentation.GlideApp
@@ -50,19 +52,24 @@ class CastFragment :
             if (viewState != null) {
 
                 viewState.media?.let { media ->
-                    media.castList?.let { list ->
+                    val castList = if (viewState.mediaType == MediaType.MOVIE)
+                        (media as Movie).castList
+                    else (media as TvShow).castList
+
+                    castList?.let { list ->
                         if (list.isNotEmpty()) {
                             recyclerAdapter.apply {
-                                preloadGlideImages(
-                                    list = list
-                                )
                                 submitList(
-                                    viewState.media!!.castList, false
+                                    list
                                 )
                             }
                         }
                         binding.emptyListText.invisible()
-                        binding.infoText.text = resources.getQuantityString(R.plurals.people_amount_format, list.size, list.size)
+                        binding.infoText.text = resources.getQuantityString(
+                            R.plurals.people_amount_format,
+                            list.size,
+                            list.size
+                        )
                         binding.recyclerViewInfoContainer.visible()
                     } ?: run {
                         binding.emptyListText.visible()
@@ -83,7 +90,6 @@ class CastFragment :
             recyclerAdapter =
                 MediaListAdapter(
                     layout = layoutManager as StaggeredGridLayoutManager,
-                    requestManager = requestManager,
                     interaction = this@CastFragment
                 )
             adapter = recyclerAdapter

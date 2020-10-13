@@ -16,14 +16,6 @@ import kotlinx.coroutines.launch
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-fun SearchViewModel.setMovieList(movieList: List<Media>) {
-    val update = getCurrentViewStateOrNew()
-    update.mediaList = movieList
-    setViewState(update)
-}
-
-@FlowPreview
-@ExperimentalCoroutinesApi
 fun SearchViewModel.setQueryExhausted(isExhausted: Boolean) {
     val update = getCurrentViewStateOrNew()
     update.isQueryExhausted = isExhausted
@@ -178,7 +170,6 @@ fun SearchViewModel.clearLayoutManagerState() {
 @FlowPreview
 @ExperimentalCoroutinesApi
 fun SearchViewModel.setDataList(list: List<Media>) {
-    println("LISTA BRE POSLE $list")
     val update = getCurrentViewStateOrNew()
     update.mediaList = list
     setViewState(update)

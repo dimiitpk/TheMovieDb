@@ -6,11 +6,8 @@ import com.dimi.moviedatabase.business.data.cache.abstraction.MovieCacheDataSour
 import com.dimi.moviedatabase.business.data.network.FakeMovieNetworkDataSourceImpl
 import com.dimi.moviedatabase.business.data.network.abstraction.MovieNetworkDataSource
 import com.dimi.moviedatabase.business.interactors.movie.MovieDetailsUseCase
-import com.dimi.moviedatabase.business.interactors.movie.SearchMoviesUseCaseTest
-import com.dimi.moviedatabase.framework.network.mappers.NetworkMapper
 import com.dimi.moviedatabase.util.isUnitTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.mockito.Mockito.mock
 
 @ExperimentalCoroutinesApi
 class DependencyInjection {

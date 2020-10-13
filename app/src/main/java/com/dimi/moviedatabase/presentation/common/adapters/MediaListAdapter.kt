@@ -17,7 +17,6 @@ import com.dimi.moviedatabase.databinding.LayoutMediaSimpleListItemBinding
 import com.dimi.moviedatabase.util.Constants.LAYOUT_LIST_SPAN_COUNT
 
 class MediaListAdapter<T : Media>(
-    private val requestManager: RequestManager,
     private val interaction: Interaction? = null,
     private val restoration: Restoration? = null,
     private val resize: Boolean = false,
@@ -98,23 +97,6 @@ class MediaListAdapter<T : Media>(
         }
     }
 
-    fun preloadGlideImages(
-        list: List<T>
-    ) {
-//        for (item in list) {
-//            if (item.posterPath != null)
-//                if (item is Person)
-//                    requestManager
-//                        .load(SMALL_IMAGE_URL_PREFIX + item.posterPath)
-//                        .circleCrop()
-//                        .preload()
-//                else
-//                    requestManager
-//                        .load(SMALL_IMAGE_URL_PREFIX + item.posterPath)
-//                        .preload()
-//        }
-    }
-
     override fun getItemViewType(position: Int): Int {
 
         layout?.let { layout ->
@@ -146,25 +128,15 @@ class MediaListAdapter<T : Media>(
         return layout
     }
 
-    // if query is exhausted and there is no more results
-    // creating new dummy object with id -1
-    // that id will be triggered in getViewType
     fun submitList(
-        list: List<T>?,
-        isQueryExhausted: Boolean
+        list: List<T>?
     ) {
-        val newList = list?.toMutableList()
-
-
-//        if (isQueryExhausted)
-        //          newList?.add(MovieUtils.createDummyMovie())
-
         val commitCallback = Runnable {
             // if process died must restore list position
             // very annoying
             restoration?.restoreListPosition()
         }
-        differ.submitList(newList, commitCallback)
+        differ.submitList(list, commitCallback)
     }
 
     class MediaViewHolder

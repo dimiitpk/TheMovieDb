@@ -1,6 +1,5 @@
 package com.dimi.moviedatabase.presentation.main.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -16,8 +15,6 @@ import com.dimi.moviedatabase.business.domain.state.StateMessageCallback
 import com.dimi.moviedatabase.business.domain.state.UIComponentType
 import com.dimi.moviedatabase.presentation.GlideApp
 import com.dimi.moviedatabase.presentation.main.BaseMainFragment
-import com.dimi.moviedatabase.presentation.main.MainActivity
-import com.dimi.moviedatabase.presentation.common.UIController
 import com.dimi.moviedatabase.presentation.main.home.adapter.HomeModel
 import com.dimi.moviedatabase.presentation.main.home.adapter.HomeRecyclerAdapter
 import com.dimi.moviedatabase.presentation.main.home.state.HomeStateEvent
@@ -25,11 +22,9 @@ import com.dimi.moviedatabase.presentation.main.home.viewmodel.*
 import com.dimi.moviedatabase.presentation.main.search.enums.MediaListType
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_search.recycler_view
 import kotlinx.android.synthetic.main.layout_home_toolbar.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.lang.ClassCastException
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -40,6 +35,7 @@ class HomeFragment : BaseMainFragment(R.layout.fragment_home), HomeRecyclerAdapt
     private var loadingProgress: Int = 0
 
     private lateinit var recyclerAdapter: HomeRecyclerAdapter
+
 
     private var _homeList: List<HomeModel> = listOf(
         HomeModel(
@@ -99,6 +95,7 @@ class HomeFragment : BaseMainFragment(R.layout.fragment_home), HomeRecyclerAdapt
             MediaListType.UPCOMING_OR_ON_THE_AIR
         )
     )
+    val homeList = _homeList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -151,7 +148,7 @@ class HomeFragment : BaseMainFragment(R.layout.fragment_home), HomeRecyclerAdapt
 
     private fun initRecyclerView() {
 
-        recycler_view.apply {
+        home_fragment_recycler_view.apply {
 
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
@@ -190,49 +187,50 @@ class HomeFragment : BaseMainFragment(R.layout.fragment_home), HomeRecyclerAdapt
 
             if (viewState != null) {
                 viewState.popularMovies?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.POPULAR && it.mediaType == MediaType.MOVIE }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.POPULAR && it.mediaType == MediaType.MOVIE }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
                 viewState.topRatedMovies?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.TOP_RATED && it.mediaType == MediaType.MOVIE }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.TOP_RATED && it.mediaType == MediaType.MOVIE }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
                 viewState.popularTvShows?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.POPULAR && it.mediaType == MediaType.TV_SHOW }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.POPULAR && it.mediaType == MediaType.TV_SHOW }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
                 viewState.topRatedTvShows?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.TOP_RATED && it.mediaType == MediaType.TV_SHOW }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.TOP_RATED && it.mediaType == MediaType.TV_SHOW }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
                 viewState.upcomingMovies?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.UPCOMING_OR_ON_THE_AIR && it.mediaType == MediaType.MOVIE }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.UPCOMING_OR_ON_THE_AIR && it.mediaType == MediaType.MOVIE }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
                 viewState.onTheAirTvShows?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.UPCOMING_OR_ON_THE_AIR && it.mediaType == MediaType.TV_SHOW }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.UPCOMING_OR_ON_THE_AIR && it.mediaType == MediaType.TV_SHOW }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
                 viewState.trendingMovies?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.TRENDING && it.mediaType == MediaType.MOVIE }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.TRENDING && it.mediaType == MediaType.MOVIE }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
                 viewState.trendingTvShows?.let { list ->
-                    _homeList.single { it.mediaListType == MediaListType.TRENDING && it.mediaType == MediaType.TV_SHOW }.list =
-                        list
+                    _homeList.single { it.mediaListType == MediaListType.TRENDING && it.mediaType == MediaType.TV_SHOW }
+                        .submitList(list)
                     recyclerAdapter.submitList(_homeList)
                 }
             }
         })
 
         viewModel.shouldDisplayProgressBar.observe(viewLifecycleOwner, {
+
             uiController.displayProgressBar(it)
         })
 
@@ -278,18 +276,18 @@ class HomeFragment : BaseMainFragment(R.layout.fragment_home), HomeRecyclerAdapt
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity?.let {
-            if (it is MainActivity) {
-                try {
-                    uiController = context as UIController
-                } catch (e: ClassCastException) {
-                    e.printStackTrace()
-                }
-            }
-        }
-    }
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        activity?.let {
+//            if (it is MainActivity) {
+//                try {
+//                    uiController = context as UIController
+//                } catch (e: ClassCastException) {
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
+//    }
 
     override fun onItemSelected(position: Int, item: HomeModel) {
 

@@ -30,12 +30,6 @@ data class Person(
         biography ?: "",
         profilePath,
         "",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         character,
         birthday,
         MediaType.PERSON

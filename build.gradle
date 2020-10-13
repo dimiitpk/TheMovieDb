@@ -76,4 +76,6 @@ ext {
 
     androidXJunitVersion = '1.1.2'
     espressoVersion = '3.3.0'
+    fragmentTesting = '1.3.0-beta01'
+    mockitoVersion = '2.21.0'
 }

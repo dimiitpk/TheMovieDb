@@ -45,9 +45,6 @@ class EpisodesFragment :
                 viewState.seasonEpisodes?.let { list ->
                     if (list.isNotEmpty()) {
                         recyclerAdapter.apply {
-                            preloadGlideImages(
-                                list = list
-                            )
                             submitList(
                                 viewState.seasonEpisodes
                             )
@@ -73,7 +70,6 @@ class EpisodesFragment :
             addItemDecoration(spaceDecoration)
             recyclerAdapter =
                 EpisodeAdapter(
-                    requestManager,
                     this@EpisodesFragment
                 )
             adapter = recyclerAdapter

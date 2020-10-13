@@ -5,8 +5,6 @@ object Constants {
     const val TEST_VALID_MOVIE_ID = 337401L
     const val TEST_INVALID_MOVIE_ID = -3L
 
-    const val TEST_PAGE_SIZE = 20
-    const val TEST_PAGE_VALID_NUMBER = 10
     const val TEST_INVALID_PAGE = 501
 
     const val TEST_VALID_SEARCH_QUERY = "flash"
@@ -17,7 +15,6 @@ object Constants {
 
 
     const val TEST_SUCCESS = 1L
-    const val TEST_FAIL = -1L
 
     const val TEST_FORCE_FAIL = -1L
     const val TEST_FORCE_THROW_EXCEPTION = -2

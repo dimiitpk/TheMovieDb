@@ -52,24 +52,10 @@ class AboutFragment :
             viewModel = this@AboutFragment.viewModel
         }
 
-        youtubePlayerView = view.findViewById(R.id.trailer)
+        youtubePlayerView = binding.trailer
         subscribeObservers()
     }
 
-
-    private fun readMoreOrLessVisibility(media: Media) {
-
-        if (media.overview.isNotBlank()) {
-            binding.overview.viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    binding.overview.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    if (binding.overview.layout.isEllipsized())
-                        binding.readMoreText.visible()
-                }
-            })
-        }
-    }
 
     private fun subscribeObservers() {
 
@@ -119,11 +105,18 @@ class AboutFragment :
         })
     }
 
-    override fun onDestroy() {
-        youtubePlayerView?.release()
-        youtubePlayerView = null
-        youtubePlayer = null
-        super.onDestroy()
+    private fun readMoreOrLessVisibility(media: Media) {
+
+        if (media.overview.isNotBlank()) {
+            binding.overview.viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    binding.overview.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    if (binding.overview.layout.isEllipsized())
+                        binding.readMoreText.visible()
+                }
+            })
+        }
     }
 
     private fun setupTrailerRecyclerView(trailers: List<Video>) {
@@ -224,5 +217,12 @@ class AboutFragment :
             else -> {
             }
         }
+    }
+
+    override fun onDestroy() {
+        youtubePlayerView?.release()
+        youtubePlayerView = null
+        youtubePlayer = null
+        super.onDestroy()
     }
 }

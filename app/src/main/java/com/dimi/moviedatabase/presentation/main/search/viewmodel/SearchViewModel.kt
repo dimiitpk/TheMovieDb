@@ -59,19 +59,22 @@ constructor(
 
     override fun handleNewData(data: SearchViewState) {
         data.let { viewState ->
-            viewState.mediaList?.let {
+            viewState.mediaList?.let { mediaList ->
                 when (getViewType()) {
                     ViewType.GENRE, ViewType.NETWORK -> {
+                        val sortedAndFilteredList = filterList(
+                            mediaList,
+                            getSortFilter(),
+                            getSortOrder()
+                        )
                         setDataList(
-                            filterList(
-                                it,
-                                getSortFilter(),
-                                getSortOrder()
-                            ).cutList(getPage())
+                            sortedAndFilteredList.cutList(getPage())
                         )
                     }
                     ViewType.NONE, ViewType.SEARCH -> {
-                        setDataList(it)
+                        setDataList(
+                            mediaList//.cutList(getPage())
+                        )
                     }
                 }
             }

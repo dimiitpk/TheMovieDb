@@ -10,4 +10,12 @@ data class HomeModel(
     var mediaType: MediaType,
     var type: String,
     var mediaListType: MediaListType
-)
+) {
+
+    fun submitList(list: List<Media>) {
+        this.list?.let {
+            if( it.isEmpty())
+                this.list = list
+        }
+    }
+}

@@ -22,7 +22,7 @@ interface MovieCacheDataSource {
 
     suspend fun getListOfMovies(
         query: String = "",
-        page: Int,
+        page: Int = 1,
         genre: Int = GENRE_DEFAULT,
         mediaListType: MediaListType? = null
     ): List<Movie>

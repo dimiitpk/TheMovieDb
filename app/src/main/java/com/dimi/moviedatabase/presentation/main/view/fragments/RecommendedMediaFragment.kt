@@ -44,11 +44,8 @@ class RecommendedMediaFragment :
 
                 viewState.recommendedMedia?.let { list ->
                     recyclerAdapter.apply {
-                        preloadGlideImages(
-                            list = list
-                        )
                         submitList(
-                            viewState.recommendedMedia, false
+                            viewState.recommendedMedia
                         )
                     }
                     binding.emptyListText.invisible()
@@ -77,7 +74,6 @@ class RecommendedMediaFragment :
             recyclerAdapter =
                 MediaListAdapter(
                     layout = layoutManager as StaggeredGridLayoutManager,
-                    requestManager = requestManager,
                     interaction = this@RecommendedMediaFragment
                 )
             adapter = recyclerAdapter

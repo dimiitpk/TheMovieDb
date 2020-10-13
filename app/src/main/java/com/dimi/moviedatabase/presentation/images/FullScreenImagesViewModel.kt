@@ -257,16 +257,8 @@ constructor(
         setViewState(update)
     }
 
-    fun getSendingImageFileUri(): Uri? {
-        return getCurrentViewStateOrNew().sendingImageFileUri
-    }
-
     private fun getPostersSize(): Int {
         return getCurrentViewStateOrNew().posters?.size ?: 0
-    }
-
-    fun getBackdropsSize(): Int {
-        return getCurrentViewStateOrNew().backdrops?.size ?: 0
     }
 
     private fun setSendingImageDownloadId(sendingImageDownloadId: Long?) {

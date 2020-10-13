@@ -96,7 +96,7 @@ class HomeRecyclerAdapter(
         init {
             with(itemView) {
 
-                recycler_view.apply {
+                home_list_recycler_view.apply {
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
                     val spaceDecoration = SpacesItemDecoration(15)
@@ -104,7 +104,6 @@ class HomeRecyclerAdapter(
                     addItemDecoration(spaceDecoration)
                     recyclerAdapter =
                         MediaListAdapter(
-                            requestManager = requestManager,
                             interaction = this@HomeViewHolder,
                             resize = true
                         )
@@ -115,7 +114,7 @@ class HomeRecyclerAdapter(
 
         fun bind(item: HomeModel) = with(itemView) {
 
-            arrow_right.setOnClickListener {
+            home_arrow_right.setOnClickListener {
                 interaction?.onItemSelected(absoluteAdapterPosition, item)
             }
 
@@ -124,13 +123,9 @@ class HomeRecyclerAdapter(
 
             recyclerAdapter.apply {
                 item.list?.let {
-                    preloadGlideImages(
-                        list = it
-                    )
                     if( it.isNotEmpty())
                         submitList(
-                            list = it,
-                            isQueryExhausted = false
+                            list = it
                         )
                     progress_bar.gone()
                 }

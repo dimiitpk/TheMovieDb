@@ -71,7 +71,7 @@ class SearchMoviesUseCaseTest {
                 }
             })
 
-            assertThat(dependencyInjection.cacheDataSource.getListOfMovies(page = 1))
+            assertThat(dependencyInjection.cacheDataSource.getListOfMovies())
                 .isEqualTo(
                     returnedList
                 )
@@ -135,7 +135,7 @@ class SearchMoviesUseCaseTest {
                 }
             })
 
-            assertThat(dependencyInjection.cacheDataSource.getListOfMovies(page = 1)).isEmpty()
+            assertThat(dependencyInjection.cacheDataSource.getListOfMovies()).isEmpty()
         }
     }
 
@@ -170,7 +170,7 @@ class SearchMoviesUseCaseTest {
                 }
             })
 
-            assertThat(dependencyInjection.cacheDataSource.getListOfMovies(page = 1)).isEqualTo(returnedList)
+            assertThat(dependencyInjection.cacheDataSource.getListOfMovies()).isEqualTo(returnedList)
         }
     }
 
@@ -200,7 +200,7 @@ class SearchMoviesUseCaseTest {
                 }
             })
 
-            assertThat(dependencyInjection.cacheDataSource.getListOfMovies(page = 1)).isEmpty()
+            assertThat(dependencyInjection.cacheDataSource.getListOfMovies()).isEmpty()
         }
     }
 
@@ -232,7 +232,7 @@ class SearchMoviesUseCaseTest {
                 }
             })
 
-            assertThat(dependencyInjection.cacheDataSource.getListOfMovies(page = 1)).isEmpty()
+            assertThat(dependencyInjection.cacheDataSource.getListOfMovies()).isEmpty()
         }
     }
 }

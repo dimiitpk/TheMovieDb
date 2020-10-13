@@ -6,7 +6,6 @@ import com.dimi.moviedatabase.business.domain.model.Movie
 import com.dimi.moviedatabase.business.domain.model.Video
 import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.framework.network.mappers.ImageMapper
-import com.dimi.moviedatabase.framework.network.mappers.NetworkMapper
 import com.dimi.moviedatabase.framework.network.mappers.movie.MovieCastNetworkMapper
 import com.dimi.moviedatabase.framework.network.mappers.movie.MovieDetailsNetworkMapper
 import com.dimi.moviedatabase.framework.network.mappers.movie.MovieListNetworkMapper
@@ -18,7 +17,6 @@ import com.dimi.moviedatabase.framework.network.responses.movie.MovieListRespons
 import com.dimi.moviedatabase.util.Genre
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
-import kotlin.random.Random
 
 class MovieFactory(
     private val testClassLoader: ClassLoader

@@ -12,7 +12,6 @@ import com.dimi.moviedatabase.databinding.LayoutSeasonListItemBinding
 import com.dimi.moviedatabase.framework.network.NetworkConstants.SMALL_IMAGE_URL_PREFIX
 
 class SeasonAdapter(
-    private val requestManager: RequestManager,
     private val interaction: Interaction? = null
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

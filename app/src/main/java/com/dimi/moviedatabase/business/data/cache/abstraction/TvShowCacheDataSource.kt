@@ -25,7 +25,7 @@ interface TvShowCacheDataSource {
 
     suspend fun getListOfTvShows(
         query: String = "",
-        page: Int,
+        page: Int = 1,
         genre: Int = GENRE_DEFAULT,
         mediaListType: MediaListType? = null,
         network: Network? = null

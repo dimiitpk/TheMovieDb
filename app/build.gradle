@@ -129,5 +129,9 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$testCoroutines"
     androidTestImplementation "com.google.truth:truth:$truthVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$archCoreTesting"
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentTesting"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
 
 }

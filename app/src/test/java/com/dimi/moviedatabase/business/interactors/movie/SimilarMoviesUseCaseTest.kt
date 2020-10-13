@@ -4,13 +4,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dimi.moviedatabase.MainCoroutineRule
 import com.dimi.moviedatabase.business.data.network.NetworkErrors
 import com.dimi.moviedatabase.business.domain.state.DataState
-import com.dimi.moviedatabase.business.domain.state.MediaType
 import com.dimi.moviedatabase.business.interactors.SharedUseCasesKeys
 import com.dimi.moviedatabase.di.DependencyInjection
 import com.dimi.moviedatabase.presentation.main.view.state.ViewMediaStateEvent
 import com.dimi.moviedatabase.presentation.main.view.state.ViewMediaViewState
 import com.dimi.moviedatabase.util.Constants.TEST_FORCE_THROW_EXCEPTION
-import com.dimi.moviedatabase.util.Constants.TEST_INVALID_MOVIE_ID
 import com.dimi.moviedatabase.util.Constants.TEST_VALID_MOVIE_ID
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi

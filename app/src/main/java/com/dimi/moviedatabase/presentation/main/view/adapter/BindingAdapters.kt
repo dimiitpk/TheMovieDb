@@ -41,9 +41,26 @@ object BindingAdapters {
         if (media != null) {
             viewGroup.removeAllViews()
             when (media.mediaType) {
-                MediaType.TV_SHOW, MediaType.MOVIE -> {
-                    if (!networks)
-                        media.genres?.let { genres ->
+                MediaType.MOVIE -> {
+                    (media as Movie).genres?.let { genres ->
+                        if (viewGroup.childCount < genres.size)
+                            for (g in genres) {
+                                viewGroup.createButton().apply {
+                                    val genreName = Genre(media.mediaType).getGenreName(g)
+                                    text = genreName
+                                    setOnClickListener {
+                                        listener.onClickViewType(
+                                            ViewType.GENRE,
+                                            genreName ?: ""
+                                        )
+                                    }
+                                }
+                            }
+                    }
+                }
+                MediaType.TV_SHOW -> {
+                    if (!networks) {
+                        (media as TvShow).genres?.let { genres ->
                             if (viewGroup.childCount < genres.size)
                                 for (g in genres) {
                                     viewGroup.createButton().apply {
@@ -58,22 +75,22 @@ object BindingAdapters {
                                     }
                                 }
                         }
-                    else
-                        if (media is TvShow) {
-                            media.networks?.let { list ->
-                                if (viewGroup.childCount < list.size)
-                                    for (item in list)
-                                        viewGroup.createButton().apply {
-                                            text = item.name
-                                            setOnClickListener {
-                                                listener.onClickViewType(
-                                                    ViewType.NETWORK,
-                                                    item.name
-                                                )
-                                            }
+                    } else
+                        (media as TvShow).networks?.let { list ->
+                            if (viewGroup.childCount < list.size)
+                                for (item in list)
+                                    viewGroup.createButton().apply {
+                                        text = item.name
+                                        setOnClickListener {
+                                            listener.onClickViewType(
+                                                ViewType.NETWORK,
+                                                item.name
+                                            )
                                         }
-                            }
+                                    }
+
                         }
+
                 }
                 MediaType.PERSON -> {
                     (media as Person).alsoKnownAs?.let { list ->
@@ -129,57 +146,6 @@ object BindingAdapters {
         }
     }
 
-//    @BindingAdapter("ellipsizeAndMaxLines")
-//    @JvmStatic
-//    fun TextView.setEllipsizeAndMaxLines(value: TextUtils.TruncateAt?) {
-//        if( value != ellipsize ) ellipsize = value
-////        if (layout.isEllipsized()) {
-//   //         maxLines = Int.MAX_VALUE
-////            ellipsize = null
-////        } else {
-////            maxLines = 3
-//    //        ellipsize = TextUtils.TruncateAt.END
-////        }
-//    }
-
-//    @BindingAdapter("ellipsizeAndMaxLinesAttrChanged")
-//    @JvmStatic
-//    fun TextView.setListener(listener: InverseBindingListener) {
-//
-//        println("InverseBindingListener ${layout.isEllipsized()}")
-//        println("InverseBindingListener2 ${getEllipsizeAndMaxLines()}")
-//        listener.onChange()
-//        viewTreeObserver.addOnGlobalLayoutListener(object :
-//            ViewTreeObserver.OnGlobalLayoutListener {
-//            override fun onGlobalLayout() {
-//                viewTreeObserver.removeOnGlobalLayoutListener(this)
-//                println("InverseBindingListener ${layout.isEllipsized()}")
-//                if (layout.isEllipsized())
-//                    listener.onChange()
-//            }
-//        })
-
-//        val searchEditText = this.findViewById(R.id.search_src_text) as EditText
-//
-//        setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                println("InverseBindingListener")
-//                searchEditText. = newText
-//                listener.onChange()
-//                return true
-//            }
-//        })
-   // }
-//
-//    @InverseBindingAdapter(attribute = "ellipsizeAndMaxLines")
-//    @JvmStatic
-//    fun TextView.getEllipsizeAndMaxLines(): TextUtils.TruncateAt? = ellipsize
-
-
     @BindingAdapter("app:tagLine")
     @JvmStatic
     fun setTagLine(view: TextView, media: Media?) {
@@ -198,26 +164,26 @@ object BindingAdapters {
 
                 when (media.mediaType) {
                     MediaType.MOVIE, MediaType.TV_SHOW -> {
-                        addView(
-                            createDetailInfoLine(
-                                context.getString(R.string.original_title),
-                                media.originalTitle ?: "-"
-                            )
-                        )
-                        addView(
-                            createDetailInfoLine(
-                                context.getString(R.string.status),
-                                media.status ?: "-"
-                            )
-                        )
-                        addView(
-                            createDetailInfoLine(
-                                context.getString(R.string.runtime),
-                                media.runtime?.toHoursAndMinutesText() ?: "-"
-                            )
-                        )
                         when (media) {
                             is Movie -> {
+                                addView(
+                                    createDetailInfoLine(
+                                        context.getString(R.string.original_title),
+                                        media.originalTitle ?: "-"
+                                    )
+                                )
+                                addView(
+                                    createDetailInfoLine(
+                                        context.getString(R.string.status),
+                                        media.status ?: "-"
+                                    )
+                                )
+                                addView(
+                                    createDetailInfoLine(
+                                        context.getString(R.string.runtime),
+                                        media.runtime?.toHoursAndMinutesText() ?: "-"
+                                    )
+                                )
                                 addView(
                                     createDetailInfoLine(
                                         context.getString(R.string.release_date),
@@ -244,6 +210,24 @@ object BindingAdapters {
                                 )
                             }
                             is TvShow -> {
+                                addView(
+                                    createDetailInfoLine(
+                                        context.getString(R.string.original_title),
+                                        media.originalTitle ?: "-"
+                                    )
+                                )
+                                addView(
+                                    createDetailInfoLine(
+                                        context.getString(R.string.status),
+                                        media.status ?: "-"
+                                    )
+                                )
+                                addView(
+                                    createDetailInfoLine(
+                                        context.getString(R.string.runtime),
+                                        media.runtime?.toHoursAndMinutesText() ?: "-"
+                                    )
+                                )
                                 addView(
                                     createDetailInfoLine(
                                         context.getString(R.string.first_air_date),

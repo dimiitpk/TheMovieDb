@@ -118,14 +118,10 @@ class SearchFragment : BaseDBDialogFragment<FragmentSearchBinding>(R.layout.frag
             if (isRecyclerAdapterInitializer()) {
                 recyclerAdapter.apply {
                     viewState.mediaList?.let {
-                        preloadGlideImages(
-                            list = it
-                        )
                         if( viewState.page == 1 ) this@SearchFragment.resetUI(false)
                     }
                     submitList(
-                        list = viewState.mediaList,
-                        isQueryExhausted = viewState.isQueryExhausted ?: true
+                        list = viewState.mediaList
                     )
                 }
             }
@@ -192,7 +188,6 @@ class SearchFragment : BaseDBDialogFragment<FragmentSearchBinding>(R.layout.frag
             recyclerAdapter =
                 MediaListAdapter(
                     layout = layoutManager as StaggeredGridLayoutManager,
-                    requestManager = GlideApp.with(this@SearchFragment),
                     interaction = this@SearchFragment,
                     restoration = this@SearchFragment
                 )
