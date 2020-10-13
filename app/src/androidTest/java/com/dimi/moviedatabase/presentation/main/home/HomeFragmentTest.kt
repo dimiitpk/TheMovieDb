@@ -10,6 +10,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.MediumTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.dimi.moviedatabase.R
 import com.dimi.moviedatabase.business.domain.model.Media
 import com.dimi.moviedatabase.business.domain.state.MediaType
@@ -21,6 +22,7 @@ import com.dimi.moviedatabase.presentation.main.MainFragmentFactoryTest
 import com.dimi.moviedatabase.presentation.main.home.adapter.HomeModel
 import com.dimi.moviedatabase.presentation.main.home.adapter.HomeRecyclerAdapter
 import com.dimi.moviedatabase.presentation.main.search.enums.ViewType
+import com.dimi.moviedatabase.util.EspressoIdlingResourceRule
 import com.dimi.moviedatabase.util.recyclerChildAction
 import com.dimi.moviedatabase.util.withIndex
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -32,6 +34,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import javax.inject.Inject
@@ -41,7 +44,11 @@ import javax.inject.Inject
 @MediumTest
 @HiltAndroidTest
 @ExperimentalCoroutinesApi
+@RunWith(AndroidJUnit4ClassRunner::class)
 class HomeFragmentTest {
+
+    @get: Rule
+    val espressoIdlingResourceRule = EspressoIdlingResourceRule()
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
@@ -104,8 +111,6 @@ class HomeFragmentTest {
             homeModel = this.homeList[position]
         }
 
-        delay(1000)
-
         val recyclerView = onView(withId((R.id.home_fragment_recycler_view)))
 
         recyclerView.check(matches(isDisplayed()))
@@ -139,8 +144,6 @@ class HomeFragmentTest {
                 media = it[position]
             }
         }
-
-        delay(1000)
 
         onView(withIndex(withId(R.id.home_list_recycler_view), position))
             .perform(

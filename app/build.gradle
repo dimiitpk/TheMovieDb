@@ -113,6 +113,8 @@ dependencies {
 
     implementation "com.pierfrancescosoffritti.androidyoutubeplayer:core:$youtubeVersion"
 
+    implementation "androidx.test.espresso:espresso-idling-resource:3.3.0"
+
 
     // local unit testing
     implementation "androidx.test:core:$androidXCoreTest"
@@ -133,5 +135,6 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
     androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:3.3.0"
 
 }

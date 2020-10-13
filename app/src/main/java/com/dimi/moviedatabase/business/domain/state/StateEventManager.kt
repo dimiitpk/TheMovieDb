@@ -3,6 +3,7 @@ package com.dimi.moviedatabase.business.domain.state
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dimi.moviedatabase.util.EspressoIdlingResource
 
 class StateEventManager {
 
@@ -19,17 +20,22 @@ class StateEventManager {
 
     fun clearActiveStateEventCounter(){
         Log.d("DCM", "Clear active state events")
+        EspressoIdlingResource.clear()
         activeStateEvents.clear()
         syncNumActiveStateEvents()
     }
 
     fun addStateEvent(stateEvent: StateEvent){
+        EspressoIdlingResource.increment()
         activeStateEvents[stateEvent.eventName()] = stateEvent
         syncNumActiveStateEvents()
     }
 
     fun removeStateEvent(stateEvent: StateEvent?){
         Log.d("DCM sem", "remove state event: ${stateEvent?.eventName()}")
+        stateEvent?.let {
+            EspressoIdlingResource.decrement()
+        }
         activeStateEvents.remove(stateEvent?.eventName())
         syncNumActiveStateEvents()
     }
